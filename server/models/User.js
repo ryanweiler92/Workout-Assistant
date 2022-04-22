@@ -17,7 +17,13 @@ const userSchema = new Schema(
       password: {
         type: String,
         required: true,
-      }
+      },
+      savedExercises: [
+        {
+        type: Schema.Types.ObjectId,
+        ref: 'Exercise'
+        }
+      ]
     },
     {
       toJSON: {

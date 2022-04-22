@@ -6,14 +6,31 @@ type User {
     _id: ID
     username: String
     email: String
+    savedExercises: [Exercise]
 }
 
-type Query {
+type Exercise{
+    name: String
+    bodyPart: String
+    equipment: String
+    id: String
+    gifURL: String
+    notes: String
+}
+type Auth {
+    token: ID
+    user: User
+  }
+
+  type Query {
     me: User
-    users: [User]
-    user(username: String!): User  
-}
-
-`
+  }
+  type Mutation {
+    login(email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
+    savedExercise(exerciseData: Exercise): User
+    removeExercise(exerciseId: ID!): User
+  }
+`;
 
 module.exports = typeDefs

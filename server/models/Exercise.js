@@ -11,16 +11,14 @@ const exerciseSchema = new Schema({
   bodyPart: {
     type: String
   },
+  id: {
+    type: String
+  },
   equipment: {
     type: String
   },
   gifURL: {
     type: String
-  },
-  id: {
-    type: Number,
-    min: 0,
-    default: 0
   },
   notes: {
     type: String

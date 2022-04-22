@@ -1,17 +1,47 @@
-body {
-  font-family: 'Rubik', sans-serif;
+:root{
+  --primary: #1BB400;
+  --secondary: #00308C;
+  --tertiary: #E4DAD6;
+  --bitter: #C8D004;
+  --crayola: #0189D3;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'Rubik Mono One', sans-serif;
+body{
+  background: var(--crayola)
+}
+.navbar {
+  background-color: var(--primary);
 }
 
-.small {
-  font-weight: 300;
-  font-style: italic;
+.navbar .container-fluid .navbar-brand{
+  color: white;
+  font-size: 40px;
+}
+
+.navbar .container-fluid .navbar-nav .nav-link{
+  color: white;
+  font-size: 25px;
+}
+
+.hero {
+  background-image: url("./assets/images/gym1.jpg");
+  background-size: cover;
+  background-position: top;
+  height: 100px;
+  border: solid black 4px;
+}
+
+
+
+
+@media screen and (max-width: 574px){
+  .navbar .container-fluid .navbar-brand{
+    font-size: 25px;
+}
+
+.navbar .container-fluid .navbar-nav .nav-link{
+  color: white;
+  font-size: 15px;
+}
+
 }

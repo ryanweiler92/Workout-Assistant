@@ -7,16 +7,21 @@ const Navigation = () => {
 
     return (
         <>
-        <Navbar>
-            <Container>
-                <Navbar.Brand>Workout Assistant</Navbar.Brand>
-                <Nav className="me-auto">
+        <Navbar expand='lg'>
+            <Container fluid>
+                <Navbar.Brand >
+                    Workout Assistant
+                </Navbar.Brand>
+                <Nav className="ml-auto">
                     <Nav.Link>Home</Nav.Link>
                     <Nav.Link>Profile</Nav.Link>
-                    <Nav.Link>Sign In/Sign Up</Nav.Link>
+                    <Nav.Link>Login</Nav.Link>
+                    <Nav.Link>Sign Up</Nav.Link>
                 </Nav>
             </Container>
         </Navbar>
+        <Container fluid className="hero">
+        </Container>
         </>
     )
 };

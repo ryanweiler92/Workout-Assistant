@@ -1,5 +1,15 @@
 export const queryExercises = (query) => {
 
+    // from stack overflow user abdennour toumi
+    function randomize(array) {
+        const n=50;
+        const shuffled = array.sort(function(){return .5 - Math.random()});
+
+        const selected = shuffled.slice(0,n);
+        console.log(selected);
+        return selected;
+    }
+
     const options = {
         method: 'GET',
         headers: {
@@ -11,7 +21,7 @@ export const queryExercises = (query) => {
     if (query === 'All types') {
         fetch('https://exercisedb.p.rapidapi.com/exercises', options)
             .then(response => response.json())
-            .then(response => console.log(response))
+            .then(response => randomize(response))
             .catch(err => console.error(err));
     } else {
         const queryVal = query.toLowerCase().replace(/ /g, '%20');

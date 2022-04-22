@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Col, Form, Button } from 'react-bootstrap'
+import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap'
 import { queryExercises } from '../utils/API'
 
 const Home = () => {
@@ -11,16 +11,21 @@ const Home = () => {
         event.preventDefault();
     
         try {
-            const response = await queryExercises(searchInput)
+            const response = await queryExercises(searchInput);
 
-            const  items  = await response.json();
+            const items = await response.json();
 
-            console.log(items)
+            var exerciseData = items.map((exercise) => ({
+                bodyPart: exercise.bodyPart,
+                equipment: exercise.equipment,
+                gifUrl: exercise.gifUrl,
+                id: exercise.id, 
+                name: exercise.name,
+                target: exercise.target
+            }));
 
-            const exerciseData = items.map((exercise) => ({
-                bodyPart: exercise.bodyPart
-            }))
             setSearchedExercises(exerciseData)
+            console.log(searchedExercise);
             setSearchInput('');
         } catch (err){
             console.error(err)
@@ -49,12 +54,21 @@ const Home = () => {
                                 <option>Waist</option>
                             </optgroup>
                             </select>
-                            <Button variant="success" onClick={handleFormSubmit} name='searchSubmit'>
+                            <Button variant='success' onClick={handleFormSubmit} name='searchSubmit'>
                                 Submit
                             </Button>
                         </Col>
                     </Form.Row>
                 </Form>
+                {/* {exerciseData &&
+                    <Row>
+                        <Col>
+                            <div className='container'>
+                                Test
+                            </div>
+                        </Col>
+                    </Row>
+                } */}
             </Container>
         </>  
     ) 

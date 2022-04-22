@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Col, Form, Button } from 'react-bootstrap'
-import { exercisesByBodyPart } from '../utils/API'
+import { queryExercises } from '../utils/API'
 
 const Home = () => {
     const [searchedExercise, setSearchedExercises] = useState([]);
@@ -9,21 +9,19 @@ const Home = () => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        const queryVal = searchInput;
-        console.log(searchInput)
-        
+    
         try {
-            // const response = await exercisesByBodyPart(searchInput)
+            const response = await queryExercises(searchInput)
 
-            // const  items  = await response.json();
+            const  items  = await response.json();
 
-            // console.log(items)
+            console.log(items)
 
-            // const exerciseData = items.map((exercise) => ({
-            //     bodyPart: exercise.bodyPart
-            // }))
-            // setSearchedExercises(exerciseData)
-            // setSearchInput('');
+            const exerciseData = items.map((exercise) => ({
+                bodyPart: exercise.bodyPart
+            }))
+            setSearchedExercises(exerciseData)
+            setSearchInput('');
         } catch (err){
             console.error(err)
         }
@@ -33,7 +31,7 @@ const Home = () => {
         <>
             <Container>
                 <h1>Find exercises</h1>
-                <Form onSubmit={handleFormSubmit}>
+                <Form>
                     <Form.Row>
                         <Col>
                             <select className='selectpicker' onChange={(e) => setSearchInput(e.target.value)}>
@@ -51,7 +49,7 @@ const Home = () => {
                                 <option>Waist</option>
                             </optgroup>
                             </select>
-                            <Button variant='outline-success' onClick={handleFormSubmit} name='searchSubmit'>
+                            <Button variant="success" onClick={handleFormSubmit} name='searchSubmit'>
                                 Submit
                             </Button>
                         </Col>

@@ -1,4 +1,4 @@
-export const exercisesByBodyPart = (query) => {
+export const queryExercises = (query) => {
 
     const options = {
         method: 'GET',
@@ -8,9 +8,16 @@ export const exercisesByBodyPart = (query) => {
         }
     };
     
-    fetch('https://exercisedb.p.rapidapi.com/exercises/bodyPart/back', options)
-        .then(response => response.json())
-        .then(response => console.log(response))
-        .catch(err => console.error(err));
-
+    if (query === 'All types') {
+        fetch('https://exercisedb.p.rapidapi.com/exercises', options)
+            .then(response => response.json())
+            .then(response => console.log(response))
+            .catch(err => console.error(err));
+    } else {
+        const queryVal = query.toLowerCase().replace(/ /g, '%20');
+        fetch('https://exercisedb.p.rapidapi.com/exercises/bodyPart/' + queryVal, options)
+            .then(response => response.json())
+            .then(response => console.log(response))
+            .catch(err => console.error(err));
+    }
 } 

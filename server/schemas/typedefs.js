@@ -17,6 +17,16 @@ type Exercise{
     gifURL: String
     notes: String
 }
+
+input ExerciseInput {
+name: [String]
+bodyPart: String
+equipment: String
+id: String
+gifURL: String
+notes: String
+}
+
 type Auth {
     token: ID
     user: User
@@ -28,7 +38,7 @@ type Auth {
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    savedExercise(exerciseData: Exercise): User
+    saveExercise(exerciseData: ExerciseInput): User
     removeExercise(exerciseId: ID!): User
   }
 `;

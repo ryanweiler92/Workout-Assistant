@@ -1,32 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import {Container, Col, Form, Button} from 'react-bootstrap'
+import { Container, Col, Form, Button } from 'react-bootstrap'
 import { exercisesByBodyPart } from '../utils/API'
 
 const Home = () => {
     const [searchedExercise, setSearchedExercises] = useState([]);
 
-    const [searchInput, setSearchInput] = useState('');
+    const [searchInput, setSearchInput] = useState('All types');
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-
-        if (!searchInput) {
-            return false;
-        }
-
+        const queryVal = searchInput;
+        console.log(searchInput)
+        
         try {
-            const response = await exercisesByBodyPart(searchInput)
-            console.log(searchInput)
+            // const response = await exercisesByBodyPart(searchInput)
 
-            const  items  = await response.json();
+            // const  items  = await response.json();
 
-            console.log(items)
+            // console.log(items)
 
-            const exerciseData = items.map((exercise) => ({
-                bodyPart: exercise.bodyPart
-            }))
-            setSearchedExercises(exerciseData)
-            setSearchInput('');
+            // const exerciseData = items.map((exercise) => ({
+            //     bodyPart: exercise.bodyPart
+            // }))
+            // setSearchedExercises(exerciseData)
+            // setSearchInput('');
         } catch (err){
             console.error(err)
         }
@@ -34,26 +31,35 @@ const Home = () => {
 
     return (
         <>
-        <Container>
-            <h1>Search for Exercises!</h1>
-            <Form onSubmit={handleFormSubmit}>
-                <Form.Row>
-                    <Col xs={12} md={8}>
-                        <Form.Control
-                         name='searchInput'
-                         value={searchInput}
-                         onChange={(e) => setSearchInput(e.target.value)}
-                         type='text'
-                         size='lg'
-                         placeholder='Search for an exercise'
-                        />
-                    </Col>
-                </Form.Row>
-            </Form>
-        </Container>
-        </>
-    )
-
+            <Container>
+                <h1>Find exercises</h1>
+                <Form onSubmit={handleFormSubmit}>
+                    <Form.Row>
+                        <Col>
+                            <select className='selectpicker' onChange={(e) => setSearchInput(e.target.value)}>
+                                <option>All types</option>
+                            <optgroup label='By body part'>
+                                <option>Back</option>
+                                <option>Cardio</option>
+                                <option>Chest</option>
+                                <option>Lower arms</option>
+                                <option>Lower legs</option>
+                                <option>Neck</option>
+                                <option>Shoulders</option>
+                                <option>Upper arms</option>
+                                <option>Upper legs</option>
+                                <option>Waist</option>
+                            </optgroup>
+                            </select>
+                            <Button variant='outline-success' onClick={handleFormSubmit} name='searchSubmit'>
+                                Submit
+                            </Button>
+                        </Col>
+                    </Form.Row>
+                </Form>
+            </Container>
+        </>  
+    ) 
 }
 
 export default Home

@@ -2,7 +2,7 @@ const db = require('./connection');
 const { User, Exercise } = require('../models');
 
 db.once('open', async () => {
-  await bodyPart.deleteMany();
+  await BodyPart.deleteMany();
 
   const bodyParts = await bodyPart.insertMany([
     { name: 'Back' },

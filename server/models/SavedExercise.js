@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const savedSchema = new Schema({
+const savedExerciseSchema = new Schema({
   savedExercises: [
     {
       type: Schema.Types.ObjectId,
@@ -11,6 +11,6 @@ const savedSchema = new Schema({
   ]
 });
 
-const SavedExercise = mongoose.model('SavedExercise', savedSchema);
+const SavedExercise = mongoose.model('SavedExercise', savedExerciseSchema);
 
 module.exports = SavedExercise; 

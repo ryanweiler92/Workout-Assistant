@@ -54,7 +54,6 @@ type Auth {
                      id: String,
                      equipment: String,
                      gifURL: String): User
-
   }
 `;
 

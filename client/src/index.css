@@ -34,7 +34,7 @@ body{
   background-image: url("./assets/images/gym1.jpg");
   background-size: cover;
   background-position: top;
-  height: 100px;
+  height: 150px;
   border: solid black 2px;
 }
 
@@ -49,6 +49,12 @@ body{
 
 .home-container .card {
   color: black
+}
+
+.card{
+  background-image: url("./assets/images/background-7.jpg");
+  background-position: left top;
+  background-repeat: repeat;
 }
 
 .search-gif{

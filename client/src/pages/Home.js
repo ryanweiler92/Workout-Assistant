@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Card, Modal } from 'react-bootstrap';
 import { queryExercises } from '../utils/API';
 import Auth from '../utils/auth';
+import { useSpring, animated } from '@react-spring/web'
 
 const Home = () => {
     const [searchedExercise, setSearchedExercises] = useState([]);
@@ -56,9 +57,35 @@ const Home = () => {
         }
     }
 
+    const styles = useSpring({
+        from: {
+          opacity: 0
+        },
+        to: {
+          opacity: 1
+        },
+        config: {
+            duration: 2000
+        }
+      });
+
+      const boxShadowChange = useSpring({
+        from: {
+          boxShadow: '0px 0px 10px 5px rgb(52,183,254)'
+        },
+        to: {
+          boxShadow: '0px 0px 10px 5px rgb(255,255,255)'
+          
+        },
+        config: {
+            duration: 2000
+        },
+        loop: {reverse: true}
+    })
+
     return (
         <>
-            <Container className="home-container mt-3">
+            <animated.div style={styles} className="container home-container mt-3">
                 <Row className="d-flex align-items-center justify-content-center mt-1 pt-4">
                     <Col lg="8" className="d-flex align-items-center justify-content-center">
                         <h1>Welcome to your Workout Assistant!</h1>
@@ -100,14 +127,14 @@ const Home = () => {
                     return (
                         
                             <Col xs={12} md={8} lg={5} className="m-2">
-                                <Card className="d-flex align-items-center justify-content-center">
+                                <animated.div style={boxShadowChange} className="card d-flex align-items-center justify-content-center">
                                     <Card.Header className="w-100 text-center">{exercise.name}</Card.Header>
                                     <Card.Body key={exercise.id} border='dark' onClick={() => handleChooseExercise(exercise)}>
                                         <Card.Text>Body Part: {exercise.bodyPart}</Card.Text>
                                         <Card.Img variant="bottom" src={exercise.gifUrl} className="search-gif"/>
                                     </Card.Body>
                                     <Button onClick={() => handleChooseExercise(exercise)}>View Exercise</Button>
-                                </Card>
+                                </animated.div>
                             </Col>
                         
                     );
@@ -134,7 +161,7 @@ const Home = () => {
                         )}
                     </Modal.Body>
                 </Modal>
-            </Container>
+            </animated.div>
         </>  
     ) 
 }

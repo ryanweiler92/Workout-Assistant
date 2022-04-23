@@ -24,7 +24,7 @@ type User {
   _id: ID
   username: String
   email: String
-  savedExercises: [SavedExercise]
+  savedExercises: [Exercise]
 }
 
 type Auth {
@@ -43,9 +43,14 @@ type Auth {
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    removeSavedExercise(exercises: [ID]!): SavedExercise
+    
     updateUser(username: String!, email: String!, password: String!): User
-    addSavedExercise(exercises: [ID]!): SavedExercise
+    removeExercise(id: ID!): User
+    saveExercise(name: String,
+                     bodyPart: String,
+                     id: String,
+                     equipment: String,
+                     gifURL: String): User
 
   }
 `;

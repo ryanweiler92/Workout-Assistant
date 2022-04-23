@@ -2,22 +2,22 @@ const db = require('./connection');
 const { User, Exercise } = require('../models');
 
 db.once('open', async () => {
-//   await Category.deleteMany();
+  await bodyPart.deleteMany();
 
-//   const categories = await Category.insertMany([
-//     { name: 'Back' },
-//     { name: 'Biceps' },
-//     { name: 'Triceps' },
-//     { name: 'Quads' },
-//     { name: 'Core' }
-//   ]);
+  const bodyParts = await bodyPart.insertMany([
+    { name: 'Back' },
+    { name: 'Biceps' },
+    { name: 'Triceps' },
+    { name: 'Quads' },
+    { name: 'Core' }
+  ]);
 
-//   console.log('categories seeded');
+  console.log('body parts seeded');
 
   const exercises = await Exercise.insertMany([
     {
       name: 'Cookies',
-      bodyPart: 'Back',
+      bodyPart: bodyParts[0]._id,
       id: 001,
       equipment: 'dumbells',
       gifURL: 'https://media.giphy.com/media/Zaej3GIZTzCI8/giphy.gif',
@@ -25,7 +25,7 @@ db.once('open', async () => {
     },
     {
         name: 'Oreos',
-        bodyPart: 'Biceps',
+        bodyPart: bodyParts[1]._id,
         id: 002,
         equipment: 'dumbells',
         gifURL: 'https://media.giphy.com/media/Zaej3GIZTzCI8/giphy.gif',
@@ -33,7 +33,7 @@ db.once('open', async () => {
       },
       {
         name: 'Goldfish',
-        bodyPart: 'Triceps',
+        bodyPart: bodyParts[2]._id,
         id: 003, 
         equipment: 'dumbells',
         gifURL: 'https://media.giphy.com/media/Zaej3GIZTzCI8/giphy.gif',
@@ -41,7 +41,7 @@ db.once('open', async () => {
       },
       {
         name: 'Popcorn',
-        bodyPart: 'Core',
+        bodyPart: bodyParts[3]._id,
         id: 004,
         equipment: 'dumbells',
         gifURL: 'https://media.giphy.com/media/Zaej3GIZTzCI8/giphy.gif',
@@ -49,7 +49,7 @@ db.once('open', async () => {
       },
       {
         name: 'Crackers',
-        bodyPart: 'Quads',
+        bodyPart: bodyParts[4]._id,
         id: 004,
         equipment: 'dumbells',
         gifURL: 'https://media.giphy.com/media/Zaej3GIZTzCI8/giphy.gif',

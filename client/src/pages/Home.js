@@ -1,32 +1,46 @@
 import React, { useState, useEffect } from 'react';
-import {Container, Col, Form, Button} from 'react-bootstrap'
-import { exercisesByBodyPart } from '../utils/API'
+import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap'
+import { queryExercises } from '../utils/API'
 
 const Home = () => {
     const [searchedExercise, setSearchedExercises] = useState([]);
 
-    const [searchInput, setSearchInput] = useState('');
+    const [searchInput, setSearchInput] = useState('All types');
+
+    // from stackoverflow user abdennour toumi
+    function randomize(array) {
+        const n=50;
+        const shuffled = array.sort(function(){return .5 - Math.random()});
+
+        const selected = shuffled.slice(0,n);
+    
+        return selected;
+    }
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-
-        if (!searchInput) {
-            return false;
-        }
-
+    
         try {
-            const response = await exercisesByBodyPart(searchInput)
-            console.log(searchInput)
+            const response = await queryExercises(searchInput);
 
-            const  items  = await response.json();
+            const items = await response.json();
 
-            console.log(items)
+            const fiftyEntries = await randomize(items);
 
-            const exerciseData = items.map((exercise) => ({
-                bodyPart: exercise.bodyPart
-            }))
+            console.log(items);
+            console.log(fiftyEntries);
+
+            var exerciseData = fiftyEntries.map((exercise) => ({
+                bodyPart: exercise.bodyPart,
+                equipment: exercise.equipment,
+                gifUrl: exercise.gifUrl,
+                id: exercise.id, 
+                name: exercise.name,
+                target: exercise.target
+            }));
+
             setSearchedExercises(exerciseData)
-            setSearchInput('');
+            // setSearchInput('');
         } catch (err){
             console.error(err)
         }
@@ -34,26 +48,46 @@ const Home = () => {
 
     return (
         <>
-        <Container>
-            <h1>Search for Exercises!</h1>
-            <Form onSubmit={handleFormSubmit}>
-                <Form.Row>
-                    <Col xs={12} md={8}>
-                        <Form.Control
-                         name='searchInput'
-                         value={searchInput}
-                         onChange={(e) => setSearchInput(e.target.value)}
-                         type='text'
-                         size='lg'
-                         placeholder='Search for an exercise'
-                        />
-                    </Col>
-                </Form.Row>
-            </Form>
-        </Container>
-        </>
-    )
-
+            <Container>
+                <h1>Find exercises</h1>
+                <Form>
+                    <Form.Row>
+                        <Col>
+                            <select className='selectpicker' onChange={(e) => setSearchInput(e.target.value)}>
+                                <option>All types</option>
+                            <optgroup label='By body part'>
+                                <option>Back</option>
+                                <option>Cardio</option>
+                                <option>Chest</option>
+                                <option>Lower arms</option>
+                                <option>Lower legs</option>
+                                <option>Neck</option>
+                                <option>Shoulders</option>
+                                <option>Upper arms</option>
+                                <option>Upper legs</option>
+                                <option>Waist</option>
+                            </optgroup>
+                            </select>
+                            <Button variant='success' onClick={handleFormSubmit} name='searchSubmit'>
+                                Submit
+                            </Button>
+                        </Col>
+                    </Form.Row>
+                </Form>
+                {searchedExercise.map((exercise) => {
+                    return (
+                        <Row key={exercise.id}>
+                            <Col xs={12} md={8}>
+                                <Card body border='dark'>
+                                    <p>{exercise.name} | {exercise.bodyPart}</p>
+                                </Card>
+                            </Col>
+                        </Row>
+                    );
+                })}
+            </Container>
+        </>  
+    ) 
 }
 
 export default Home

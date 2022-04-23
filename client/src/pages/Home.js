@@ -7,6 +7,16 @@ const Home = () => {
 
     const [searchInput, setSearchInput] = useState('All types');
 
+    // from stackoverflow user abdennour toumi
+    function randomize(array) {
+        const n=50;
+        const shuffled = array.sort(function(){return .5 - Math.random()});
+
+        const selected = shuffled.slice(0,n);
+    
+        return selected;
+    }
+
     const handleFormSubmit = async (event) => {
         event.preventDefault();
     
@@ -15,7 +25,12 @@ const Home = () => {
 
             const items = await response.json();
 
-            var exerciseData = items.map((exercise) => ({
+            const fiftyEntries = await randomize(items);
+
+            console.log(items);
+            console.log(fiftyEntries);
+
+            var exerciseData = fiftyEntries.map((exercise) => ({
                 bodyPart: exercise.bodyPart,
                 equipment: exercise.equipment,
                 gifUrl: exercise.gifUrl,
@@ -25,8 +40,7 @@ const Home = () => {
             }));
 
             setSearchedExercises(exerciseData)
-            console.log(searchedExercise);
-            setSearchInput('');
+            // setSearchInput('');
         } catch (err){
             console.error(err)
         }
@@ -60,15 +74,17 @@ const Home = () => {
                         </Col>
                     </Form.Row>
                 </Form>
-                {/* {exerciseData &&
-                    <Row>
-                        <Col>
-                            <div className='container'>
-                                Test
-                            </div>
-                        </Col>
-                    </Row>
-                } */}
+                {searchedExercise.map((exercise) => {
+                    return (
+                        <Row key={exercise.id}>
+                            <Col xs={12} md={8}>
+                                <Card body border='dark'>
+                                    <p>{exercise.name} | {exercise.bodyPart}</p>
+                                </Card>
+                            </Col>
+                        </Row>
+                    );
+                })}
             </Container>
         </>  
     ) 

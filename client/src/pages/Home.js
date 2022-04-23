@@ -58,8 +58,18 @@ const Home = () => {
 
     return (
         <>
-            <Container>
-                <h1>Find exercises</h1>
+            <Container className="home-container mt-3">
+                <Row className="d-flex align-items-center justify-content-center mt-1 pt-4">
+                    <Col lg="8" className="d-flex align-items-center justify-content-center">
+                        <h1>Welcome to your Workout Assistant!</h1>
+                    </Col>
+                </Row>
+                <Row className="d-flex align-items-center justify-content-center mt-1">
+                    <Col lg="8" className="d-flex align-items-center justify-content-center">
+                        <h4>Select a muscle group from the dropdown to get started!</h4>
+                    </Col>
+                </Row>
+                <Row className="d-flex align-items-center justify-content-center mt-1">
                 <Form>
                     <Form.Row>
                         <Col>
@@ -78,23 +88,31 @@ const Home = () => {
                                 <option>Waist</option>
                             </optgroup>
                             </select>
-                            <Button variant='success' onClick={handleFormSubmit} name='searchSubmit'>
+                            <Button variant='primary' onClick={handleFormSubmit} name='searchSubmit'>
                                 Submit
                             </Button>
                         </Col>
                     </Form.Row>
                 </Form>
+                </Row>
+                <Row  className="d-flex align-items-center justify-content-center m-3">
                 {searchedExercise.map((exercise) => {
                     return (
-                        <Row key={exercise.id}>
-                            <Col xs={12} md={8}>
-                                <Card body border='dark' onClick={() => handleChooseExercise(exercise)}>
-                                    <p>{exercise.name} | {exercise.bodyPart}</p>
+                        
+                            <Col xs={12} md={8} lg={5} className="m-2">
+                                <Card className="d-flex align-items-center justify-content-center">
+                                    <Card.Header className="w-100 text-center">{exercise.name}</Card.Header>
+                                    <Card.Body key={exercise.id} border='dark' onClick={() => handleChooseExercise(exercise)}>
+                                        <Card.Text>Body Part: {exercise.bodyPart}</Card.Text>
+                                        <Card.Img variant="bottom" src={exercise.gifUrl} className="search-gif"/>
+                                    </Card.Body>
+                                    <Button onClick={() => handleChooseExercise(exercise)}>View Exercise</Button>
                                 </Card>
                             </Col>
-                        </Row>
+                        
                     );
                 })}
+                </Row>
                 <Modal
                     size="lg"
                     show={showExModal}

@@ -23,12 +23,13 @@ body{
   font-size: 25px;
 }
 
+
 .hero {
   background-image: url("./assets/images/gym1.jpg");
   background-size: cover;
   background-position: top;
   height: 100px;
-  border: solid black 4px;
+  border: solid black 2px;
 }
 
 

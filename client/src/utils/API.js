@@ -1,5 +1,4 @@
-export const exercisesByBodyPart = (query) => {
-
+export const queryExercises = (query) => {
     const options = {
         method: 'GET',
         headers: {
@@ -7,10 +6,10 @@ export const exercisesByBodyPart = (query) => {
             'X-RapidAPI-Key': 'df540dbf02mshbbf9b25c53b2caap1a05a6jsne960d615f5f9'
         }
     };
-    
-    fetch('https://exercisedb.p.rapidapi.com/exercises/bodyPart/back', options)
-        .then(response => response.json())
-        .then(response => console.log(response))
-        .catch(err => console.error(err));
-
+    if (query === 'All types') {
+        return fetch('https://exercisedb.p.rapidapi.com/exercises', options);
+    } else {
+        const queryVal = query.toLowerCase().replace(/ /g, '%20');
+        return fetch('https://exercisedb.p.rapidapi.com/exercises/bodyPart/' + queryVal, options);
+    }
 } 

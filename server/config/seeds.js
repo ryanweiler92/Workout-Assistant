@@ -1,10 +1,9 @@
 const db = require('./connection');
-const { User, Exercise } = require('../models');
+const { User, Exercise, BodyPart } = require('../models');
 
 db.once('open', async () => {
-  await BodyPart.deleteMany();
 
-  const bodyParts = await bodyPart.insertMany([
+  const bodyParts = await BodyPart.insertMany([
     { name: 'Back' },
     { name: 'Biceps' },
     { name: 'Triceps' },
@@ -58,8 +57,6 @@ db.once('open', async () => {
   ]);
 
   console.log('exercises seeded');
-
-  await User.deleteMany();
 
   await User.create({
     username: 'Pamela',

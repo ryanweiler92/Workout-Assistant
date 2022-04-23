@@ -1,3 +1,7 @@
+//NOTES:
+//I dont think we need 1. type SavedExercise 2. Query bodyPart/exercises/exercise
+//3. Mutation updateUser
+
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
@@ -43,9 +47,8 @@ type Auth {
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    
     updateUser(username: String!, email: String!, password: String!): User
-    removeExercise(id: ID!): User
+    removeExercise(exercises: ID!): User
     saveExercise(name: String,
                      bodyPart: String,
                      id: String,

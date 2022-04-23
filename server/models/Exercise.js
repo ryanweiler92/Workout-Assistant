@@ -1,5 +1,5 @@
 
-const { Schema, model } = require('mongoose')
+const { Schema } = require('mongoose')
 
 const exerciseSchema = new Schema({
   name: {

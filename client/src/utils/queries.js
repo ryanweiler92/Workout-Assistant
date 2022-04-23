@@ -1,23 +1,18 @@
 import { gql } from '@apollo/client';
 
-//these arent correct, just added so i didn't get an error
-
-export const GET_ME = gql`
-query me {
-    me{
+export const QUERY_USER = gql`
+query user{
+    user{
       username
       email
-      _id
+        _id
+      savedExercises{
+          name
+          bodyPart
+          id
+          equipment
+          gifURL
       }
     }
-`;
-
-export const QUERY_USER = gql`
-query user($username: String!) {
-    user(username: $username) {
-        _id
-        username
-        email
-    }
-}
+  }
 `

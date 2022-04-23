@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap'
-import { queryExercises } from '../utils/API'
+import { Container, Row, Col, Form, Button, Card, Modal } from 'react-bootstrap';
+import { queryExercises } from '../utils/API';
+import Auth from '../utils/auth';
 
 const Home = () => {
     const [searchedExercise, setSearchedExercises] = useState([]);
 
     const [searchInput, setSearchInput] = useState('All types');
+
+    const [currentExercise, setCurrentExercise] = useState('');
+
+    const [showExModal, setShowExModal] = useState(false);
+
+    const handleChooseExercise = (exercise) => {
+        setCurrentExercise(exercise);
+        setShowExModal(true);
+    }
 
     // from stackoverflow user abdennour toumi
     function randomize(array) {
@@ -78,13 +88,34 @@ const Home = () => {
                     return (
                         <Row key={exercise.id}>
                             <Col xs={12} md={8}>
-                                <Card body border='dark'>
+                                <Card body border='dark' onClick={() => handleChooseExercise(exercise)}>
                                     <p>{exercise.name} | {exercise.bodyPart}</p>
                                 </Card>
                             </Col>
                         </Row>
                     );
                 })}
+                <Modal
+                    size="lg"
+                    show={showExModal}
+                    onHide={() => setShowExModal(false)}
+                    aria-labelledby='exercise-modal'
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title id='exercise-modal'>
+                            <p>{currentExercise.name}</p>
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>Body part: {currentExercise.bodyPart}</p>
+                        <p>Equipment: {currentExercise.equipment}</p>
+                        <p>Target muscle: {currentExercise.target}</p>
+                        <img src={currentExercise.gifUrl} alt='animated demonstration' />
+                        {Auth.loggedIn() ? ( 
+                            <Button variant='success' size='lg'>Save this exercise</Button> ) : (<Button disabled variant='secondary' size='lg'>Login to save this exercise</Button>
+                        )}
+                    </Modal.Body>
+                </Modal>
             </Container>
         </>  
     ) 

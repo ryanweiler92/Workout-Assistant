@@ -57,27 +57,27 @@ const resolvers = {
 
       return { token, user };
     },
-    addSavedExercise: async (parent, { exercises }, context) => {
-      console.log(context);
+    saveExercise: async (parent, { name, bodyPart, id, equipment, gifURL }, context) => {
       if (context.user) {
-        const savedExercise = new SavedExercise({ exercises });
-
-        await User.findByIdAndUpdate(context.user._id, { $push: { savedExercises: savedExercise } });
-
-        return savedExercise;
+        const updatedUser = await User
+        .findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: {savedExercises: { name, bodyPart, id, equipment, gifURL }}},
+          { new: true }
+        );
+        return updatedUser
       }
-
       throw new AuthenticationError('Not logged in');
     },
-    removeSavedExercise: async (parent, { exercises }, context) => {
-      console.log(context);
+    removeExercise: async (parent, {id}, context) => {
       if (context.user) {
-
-        await User.findByIdAndDelete(context.user._id, { $pull: { savedExercises: savedExercise } });
-
-        return savedExercise;
+        const updatedUser = await User
+        .findOneAndUpdate(
+          {_id: context.user._id},
+          { $pull: {savedExercises: {id}}}
+        )
+        return updatedUser
       }
-
       throw new AuthenticationError('Not logged in');
     },
     updateUser: async (parent, args, context) => {

@@ -8,6 +8,9 @@ export const queryExercises = (query) => {
     };
     if (query === 'All types') {
         return fetch('https://exercisedb.p.rapidapi.com/exercises', options);
+    } else if (query === 'Body weight') {
+        const queryVal = query.toLowerCase().replace(/ /g, '%20');
+        return fetch('https://exercisedb.p.rapidapi.com/exercises/equipment/' + queryVal, options);
     } else {
         const queryVal = query.toLowerCase().replace(/ /g, '%20');
         return fetch('https://exercisedb.p.rapidapi.com/exercises/bodyPart/' + queryVal, options);

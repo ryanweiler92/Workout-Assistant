@@ -3,11 +3,16 @@ import { Container, Row, Col, Form, Button, Card, Modal, Carousel } from 'react-
 import { queryExercises } from '../utils/API';
 import { useQuery, useMutation } from '@apollo/client'
 import { SAVE_EXERCISE } from '../utils/mutations'
+import { QUERY_USER } from '../utils/queries'
 import Auth from '../utils/auth';
 import { useSpring, animated } from '@react-spring/web'
 
 const Home = () => {
     const [saveExercise] = useMutation(SAVE_EXERCISE);
+
+    const { loading, error, data } = useQuery(QUERY_USER)
+
+    const myData = data?.user || {}
 
     const [searchedExercise, setSearchedExercises] = useState([]);
 
@@ -21,6 +26,19 @@ const Home = () => {
         setCurrentExercise(exercise);
         setShowExModal(true);
     };
+
+    const getMyIds = async (id) => {
+
+        for (let i = 0; i < myData.savedExercises?.length; i++){
+            if (myData.savedExercises[i].id === id){
+                console.log("true!!")
+                return true
+            } else {
+                console.log('false!')
+                return false
+            }
+        }
+    }
 
     //Equipment Modal/Carosuel Controls
     const [showEquipModal, setEquipModal] = useState(false);
@@ -44,6 +62,13 @@ const Home = () => {
     
         return selected;
     }
+
+    // const testFunction = async (id) => {
+    //     myData.savedExercises?.some((myId) => myId === id)
+    //                         ? console.log('This exercise has already been saved!')
+    //                         : console.log('Save this exercise!')
+    // };
+    // testFunction(3217)
 
 
     const handleFormSubmit = async (event) => {
@@ -85,6 +110,10 @@ const Home = () => {
         };
 
         try {
+            console.log(myData)
+            console.log(myData.savedExercises[0].id)
+            console.log(myData.savedExercises.length)
+
             const response = await saveExercise({
                 variables: {
                     bodyPart: exerciseToSave.bodyPart,
@@ -244,15 +273,33 @@ const Home = () => {
                             <img src={currentExercise.gifUrl} alt='animated demonstration' />
                         </Row>
                     </Modal.Body>
-                    {/* {Auth.loggedIn() && (
-                        <Button
-                        disabled={}
-                    )} */}
-
-
-                    {Auth.loggedIn() ? ( 
+                    {/* {Auth.loggedIn() ? ( 
                             <Button variant='success' size='lg' onClick={() => handleSaveExercise(currentExercise.id)}>Save this exercise</Button> ) : (<Button disabled variant='secondary' size='lg'>Login to save this exercise</Button>
-                        )}
+                        )} */}
+{/* 
+                    {Auth.loggedIn() && ( 
+                            <Button 
+                            variant='success' 
+                            size='lg' 
+                            onClick={() => handleSaveExercise(currentExercise.id)}>
+                            {myData.savedExercises?.some((id) => myData.savedExercises.id === currentExercise.id)
+                            ? 'This exercise has already been saved!'
+                            : 'Save this exercise!'
+                            }
+                            </Button> ) 
+                            } */}
+
+                    {Auth.loggedIn() && ( 
+                            <Button 
+                            disabled={getMyIds(currentExercise.id)}
+                            variant='success' 
+                            size='lg' 
+                            onClick={() => handleSaveExercise(currentExercise.id)}>
+                            {myData.savedExercises?.some((id) => id === currentExercise.id)
+                            ? 'This exercise has already been saved!'
+                            : 'Save this exercise!'}
+                            </Button> 
+                            )}
                 </Modal>
 
                 <Modal show={showEquipModal} onHide={handleEquipModalClose} size="lg">

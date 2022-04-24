@@ -8,8 +8,7 @@
 
 body{
   /* background: var(--crayola) */
-  background-image: url("./assets/images/terf_bg.jpeg");
-  /* background: rgba(14, 78, 11, 0.8); */
+  background-image: url("./assets/images/turf_bg.jpeg");
   background-position: left top;
   background-size: 1000px;
   background-repeat: repeat;
@@ -63,6 +62,10 @@ body{
 
 .home-container .card {
   color: black
+}
+
+.jumbotron {
+  margin-top: 50px;
 }
 
 .card{

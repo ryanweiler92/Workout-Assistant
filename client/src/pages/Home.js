@@ -242,7 +242,7 @@ const Home = () => {
                                 />
                                 <Carousel.Caption>
                                     <h3>Cables</h3>
-                                    <p>Gym cables allow you to select differnt amounts of resistance.</p>
+                                    <p>Gym cables allow you to select different amounts of resistance.</p>
                                 </Carousel.Caption>
                             </Carousel.Item>
                             <Carousel.Item>
@@ -264,7 +264,7 @@ const Home = () => {
                                 />
                                 <Carousel.Caption>
                                     <h3>Dumbbells</h3>
-                                    <p>The dumbell is a type of free weight.</p>
+                                    <p>The dumbbell is a type of free weight.</p>
                                 </Carousel.Caption>
                             </Carousel.Item>
                             <Carousel.Item>

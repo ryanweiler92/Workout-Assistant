@@ -79,7 +79,9 @@ body{
   height: 100px;
 }
 
-
+.equip-pic{
+  opacity: .8
+}
 
 @media screen and (max-width: 574px){
   .navbar .container-fluid .navbar-brand{

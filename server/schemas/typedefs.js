@@ -48,7 +48,7 @@ type Auth {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     updateUser(username: String!, email: String!, password: String!): User
-    removeExercise(exercises: ID!): User
+    removeExercise(id: ID!): User
     saveExercise(name: String,
                      bodyPart: String,
                      id: String,

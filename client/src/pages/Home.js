@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Card, Modal, Carousel } from 'react-bootstrap';
 import { queryExercises } from '../utils/API';
+import { useQuery, useMutation } from '@apollo/client'
+import { SAVE_EXERCISE } from '../utils/mutations'
 import Auth from '../utils/auth';
 import { useSpring, animated } from '@react-spring/web'
 
 const Home = () => {
+    const [saveExercise] = useMutation(SAVE_EXERCISE);
+
     const [searchedExercise, setSearchedExercises] = useState([]);
 
     const [searchInput, setSearchInput] = useState('All types');
@@ -42,7 +46,6 @@ const Home = () => {
     }
 
 
-
     const handleFormSubmit = async (event) => {
         event.preventDefault();
     
@@ -68,6 +71,35 @@ const Home = () => {
             setSearchedExercises(exerciseData)
             // setSearchInput('');
         } catch (err){
+            console.error(err)
+        }
+    };
+
+    const handleSaveExercise = async (id) => {
+        const exerciseToSave = searchedExercise.find((exercise) => exercise.id === id);
+
+        const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+        if (!token) {
+            return false;
+        };
+
+        try {
+            const response = await saveExercise({
+                variables: {
+                    bodyPart: exerciseToSave.bodyPart,
+                    equipment: exerciseToSave.equipment,
+                    gifUrl: exerciseToSave.gifUrl,
+                    id: exerciseToSave.id, 
+                    name: exerciseToSave.name,
+                    target: exerciseToSave.target
+                },
+                headers: {
+                    authorization: `Bearer ${token}`
+                }
+            });
+
+        } catch (err) {
             console.error(err)
         }
     }
@@ -212,8 +244,14 @@ const Home = () => {
                             <img src={currentExercise.gifUrl} alt='animated demonstration' />
                         </Row>
                     </Modal.Body>
+                    {/* {Auth.loggedIn() && (
+                        <Button
+                        disabled={}
+                    )} */}
+
+
                     {Auth.loggedIn() ? ( 
-                            <Button variant='success' size='lg'>Save this exercise</Button> ) : (<Button disabled variant='secondary' size='lg'>Login to save this exercise</Button>
+                            <Button variant='success' size='lg' onClick={() => handleSaveExercise(currentExercise.id)}>Save this exercise</Button> ) : (<Button disabled variant='secondary' size='lg'>Login to save this exercise</Button>
                         )}
                 </Modal>
 

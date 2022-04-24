@@ -8,7 +8,7 @@
 
 body{
   /* background: var(--crayola) */
-  background-image: url("./assets/images/grey_bg.jpeg");
+  background-image: url("./assets/images/terf_bg.jpeg");
   /* background: rgba(14, 78, 11, 0.8); */
   background-position: left top;
   background-size: 1000px;
@@ -45,10 +45,10 @@ body{
 }
 
 .hero {
-  background-image: url("./assets/images/gym1.jpg");
-  background-size: cover;
-  background-position: top;
-  height: 150px;
+  background-image: url("./assets/images/nav_bg_equip.jpeg");
+  background-size:cover;
+  background-position: center;
+  height: 250px;
   border: solid black 2px;
 }
 

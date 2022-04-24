@@ -8,13 +8,15 @@
 
 body{
   /* background: var(--crayola) */
-  background-image: url("./assets/images/background-5.jpeg");
+  background-image: url("./assets/images/grey_bg.jpeg");
+  /* background: rgba(14, 78, 11, 0.8); */
   background-position: left top;
+  background-size: 1000px;
   background-repeat: repeat;
   font-family: 'Merriweather', serif;
 }
 .navbar {
-  background-image: url("./assets/images/background-3.jpeg");
+  /* background-image: url("./assets/images/background-3.jpeg"); */
   background-position: cover;
   font-family: 'Merriweather', serif;
 }
@@ -22,13 +24,25 @@ body{
 .navbar .container-fluid .navbar-brand{
   color: white;
   font-size: 40px;
+  padding: 10px;
+  background: rgba(14, 78, 11, 0.8);
 }
 
 .navbar .container-fluid .navbar-nav .nav-link{
   color: white;
   font-size: 25px;
+  padding: 10px;
+  background: rgba(14, 78, 11, 0.8);
+  font-style: italic;
+  margin: 5px;
 }
 
+.transbox {
+  color:black;
+  background-color: black;
+  border: 1px solid black;
+  opacity: 0.6;
+}
 
 .hero {
   background-image: url("./assets/images/gym1.jpg");

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Form, Button, Card, Modal } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Card, Modal, Carousel } from 'react-bootstrap';
 import { queryExercises } from '../utils/API';
 import Auth from '../utils/auth';
 import { useSpring, animated } from '@react-spring/web'
@@ -16,7 +16,20 @@ const Home = () => {
     const handleChooseExercise = (exercise) => {
         setCurrentExercise(exercise);
         setShowExModal(true);
-    }
+    };
+
+    //Equipment Modal/Carosuel Controls
+    const [showEquipModal, setEquipModal] = useState(false);
+
+    const handleEquipModalClose = () => setEquipModal(false);
+    const handleEquipModalShow = () => setEquipModal(true);
+
+    const [equipIndex, setEquipIndex] = useState(0);
+
+    const handleEquipSelect = (selectedIndex, e) => {
+      setEquipIndex(selectedIndex);
+    };
+    //End Equipment Modal/Carosuel Controls
 
     // from stackoverflow user abdennour toumi
     function randomize(array) {
@@ -27,6 +40,8 @@ const Home = () => {
     
         return selected;
     }
+
+
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -57,6 +72,7 @@ const Home = () => {
         }
     }
 
+    //animation controls 
     const styles = useSpring({
         from: {
           opacity: 0
@@ -82,20 +98,34 @@ const Home = () => {
         },
         loop: {reverse: true}
     })
+    //end animation controls 
+
 
     return (
-        <>
+        <animated.div style={styles}>
             <div className="container mt-2">
             <div className="jumbotron">
                 <h1 className="display-4">Say Hello to your Workout Assistant!</h1>
                 <p className="lead">Find all of the exercises you need for your next workout.</p>
                 <hr className="my-4" />
+                <Row>
+                    <Col>
                 <p>New to Workout Assistant?</p>
                 <p className="lead">
                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse">
                     Learn More
                 </button>
                 </p>
+                    </Col>
+                    <Col>
+                        <p>Need to see some examples of the equipment mentioned in Workout Assistant?</p>
+                        <p className="lead">
+                        <Button variant="primary" onClick={handleEquipModalShow}>
+                            See Examples
+                        </Button>
+                        </p>
+                    </Col>
+                </Row>
                 <div class="collapse" id="collapse">
                     <div class="card card-body">
                         To use Workout Assistant, first sign up for a new account with your email address. Once logged in you can search for exercises by muscle group and save these to your profile. 
@@ -105,7 +135,7 @@ const Home = () => {
 
             </div>
             </div>
-            <animated.div style={styles} className="container home-container mt-3">
+            <Container className="container home-container mt-3">
                 <Row className="d-flex align-items-center justify-content-center mt-1">
                     <Col lg="8" className="d-flex align-items-center justify-content-center mt-3">
                         <h4>Select a muscle group from the dropdown to get started!</h4>
@@ -186,8 +216,85 @@ const Home = () => {
                             <Button variant='success' size='lg'>Save this exercise</Button> ) : (<Button disabled variant='secondary' size='lg'>Login to save this exercise</Button>
                         )}
                 </Modal>
-            </animated.div>
-        </>  
+
+                <Modal show={showEquipModal} onHide={handleEquipModalClose} size="lg">
+                    <Modal.Header closeButton>
+                        <Modal.Title>Equipment</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body className="card">
+                        <Carousel activeIndex={equipIndex} onSelect={handleEquipSelect}>
+                            <Carousel.Item>
+                                <img 
+                                className="img-fluid equip-pic"
+                                src={require(`../assets/images/barbell.jpeg`)}
+                                alt="barbell with weights"
+                                />
+                                <Carousel.Caption>
+                                    <h3>Barbell</h3>
+                                    <p>A barbell is a long metal bar to which weights can be attached to each end.</p>
+                                </Carousel.Caption>
+                            </Carousel.Item>
+                            <Carousel.Item>
+                                <img 
+                                className="img-fluid equip-pic"
+                                src={require(`../assets/images/cable.jpeg`)}
+                                alt="gym cables"
+                                />
+                                <Carousel.Caption>
+                                    <h3>Cables</h3>
+                                    <p>Gym cables allow you to select differnt amounts of resistance.</p>
+                                </Carousel.Caption>
+                            </Carousel.Item>
+                            <Carousel.Item>
+                                <img 
+                                className="img-fluid equip-pic"
+                                src={require(`../assets/images/kettlebell.jpeg`)}
+                                alt="kettlebells"
+                                />
+                                <Carousel.Caption>
+                                    <h3>Kettlebells</h3>
+                                    <p>The kettlebell is a cast iron or cast steel ball with a handle attached to the top.</p>
+                                </Carousel.Caption>
+                            </Carousel.Item>
+                            <Carousel.Item>
+                                <img 
+                                className="img-fluid equip-pic"
+                                src={require(`../assets/images/dumbbell.jpeg`)}
+                                alt="dumbbells"
+                                />
+                                <Carousel.Caption>
+                                    <h3>Dumbbells</h3>
+                                    <p>The dumbell is a type of free weight.</p>
+                                </Carousel.Caption>
+                            </Carousel.Item>
+                            <Carousel.Item>
+                                <img 
+                                className="img-fluid equip-pic"
+                                src={require(`../assets/images/machine.jpg`)}
+                                alt="leverage machine"
+                                />
+                                <Carousel.Caption>
+                                    <h3>Leverage Machine</h3>
+                                    <p>Leverage machine are any types of machines where you can select the resistance.</p>
+                                </Carousel.Caption>
+                            </Carousel.Item>
+                            <Carousel.Item>
+                                <img 
+                                className="img-fluid equip-pic"
+                                src={require(`../assets/images/medicine-ball-2.jpeg`)}
+                                alt="medicine ball"
+                                />
+                                <Carousel.Caption>
+                                    <h3>Medicine Ball</h3>
+                                    <p>A medicine ball is a weighted ball.</p>
+                                </Carousel.Caption>
+                            </Carousel.Item>
+                        </Carousel>
+                    </Modal.Body>
+                </Modal>
+                
+            </Container>
+        </animated.div>  
     ) 
 }
 

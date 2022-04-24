@@ -27,8 +27,8 @@ mutation addUser($username: String!, $email: String!, $password: String!) {
 `
 
 export const SAVE_EXERCISE = gql `
-mutation saveExercise( $name: String, $bodyPart: String, $id: String, $equipment: String!, $gifURL: String ){
-    saveExercise(name: $name, bodyPart: $bodyPart, id: $id, equipment: $equipment, gifURL: $gifURL){
+mutation saveExercise($name: String, $bodyPart: String, $id: String, $equipment: String!, $gifUrl: String, $target: String){
+    saveExercise(name: $name, bodyPart: $bodyPart, id: $id, equipment: $equipment, gifUrl: $gifUrl, target: $target){
         _id
         username
         email
@@ -37,14 +37,15 @@ mutation saveExercise( $name: String, $bodyPart: String, $id: String, $equipment
           bodyPart
           id
           equipment
-          gifURL
+          gifUrl
+          target
         }
     }
   }
 `
 
 export const REMOVE_EXERCISE = gql`
-mutation removeExercise($id:ID!){
+mutation removeExercise($id:String!){
     removeExercise(id:$id){
       username
       email
@@ -54,7 +55,8 @@ mutation removeExercise($id:ID!){
         bodyPart
         id
         equipment
-        gifURL
+        gifUrl
+        target
       }
     }
   }

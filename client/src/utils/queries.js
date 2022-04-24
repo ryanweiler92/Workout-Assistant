@@ -11,7 +11,8 @@ query user{
           bodyPart
           id
           equipment
-          gifURL
+          gifUrl
+          target
       }
     }
   }

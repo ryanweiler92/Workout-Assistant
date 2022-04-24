@@ -16,7 +16,10 @@ const exerciseSchema = new Schema({
   equipment: {
     type: String
   },
-  gifURL: {
+  gifUrl: {
+    type: String
+  },
+  target: {
     type: String
   },
   notes: {

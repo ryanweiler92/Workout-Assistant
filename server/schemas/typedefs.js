@@ -15,7 +15,8 @@ type Exercise{
     bodyPart: String
     equipment: String
     id: String
-    gifURL: String
+    gifUrl: String
+    target: String
     notes: String
 }
 
@@ -49,11 +50,7 @@ type Auth {
     addUser(username: String!, email: String!, password: String!): Auth
     updateUser(username: String!, email: String!, password: String!): User
     removeExercise(id: ID!): User
-    saveExercise(name: String,
-                     bodyPart: String,
-                     id: String,
-                     equipment: String,
-                     gifURL: String): User
+    saveExercise(name: String, bodyPart: String, id: String, equipment: String, gifUrl: String, target: String): User
   }
 `;
 

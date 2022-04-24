@@ -57,12 +57,12 @@ const resolvers = {
 
       return { token, user };
     },
-    saveExercise: async (parent, { name, bodyPart, id, equipment, gifURL }, context) => {
+    saveExercise: async (parent, { name, bodyPart, id, equipment, gifUrl, target }, context) => {
       if (context.user) {
         const updatedUser = await User
         .findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: {savedExercises: { name, bodyPart, id, equipment, gifURL }}},
+          { $addToSet: {savedExercises: { name, bodyPart, id, equipment, gifUrl, target }}},
           { new: true }
         );
         return updatedUser

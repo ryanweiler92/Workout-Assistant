@@ -40,10 +40,10 @@ const Footer = () => {
             <Col className="col-6 text-center">
                 
             <p>
-            <p id="meet">Meet the creators</p>
+            <span id="meet">Meet the creators</span>
             <OverlayTrigger trigger="click" placement="right" overlay={popover}>
                 <Button type="button">
-                    <i class="fa-solid fa-bars"></i>
+                    <i className="fa-solid fa-bars"></i>
                 </Button>
         </OverlayTrigger>
             </p>

@@ -120,6 +120,8 @@ footer button {
 #meet{
   color: white;
   font-size: 20px;
+  display: inline;
+  padding-right: 10px;
 }
 
 @media screen and (max-width: 574px){

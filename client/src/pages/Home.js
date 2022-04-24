@@ -144,7 +144,7 @@ const Home = () => {
                     <Col>
                 <p>New to Workout Assistant?</p>
                 <p className="lead">
-                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse">
+                <button className="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse">
                     Learn More
                 </button>
                 </p>
@@ -158,8 +158,8 @@ const Home = () => {
                         </p>
                     </Col>
                 </Row>
-                <div class="collapse" id="collapse">
-                    <div class="card card-body">
+                <div className="collapse" id="collapse">
+                    <div className="card card-body">
                         To use Workout Assistant, first sign up for a new account with your email address. Once logged in you can search for exercises by muscle group and save these to your profile. 
                         Navigate to your profile to view your saved exercises.
                     </div>
@@ -179,6 +179,7 @@ const Home = () => {
                         <Col>
                             <select className='selectpicker' onChange={(e) => setSearchInput(e.target.value)}>
                                 <option>All types</option>
+                                <option>Body weight</option>
                             <optgroup label='By body part'>
                                 <option>Back</option>
                                 <option>Cardio</option>
@@ -202,12 +203,12 @@ const Home = () => {
                 <Row  className="d-flex align-items-center justify-content-center m-3">
                 {searchedExercise.map((exercise) => {
                     return (
-                            <Col xs={12} md={8} lg={5} className="m-2">
+                            <Col xs={12} md={8} lg={5} className="m-2" key={exercise.id}>
                                 <animated.div style={boxShadowChange} className="card d-flex align-items-center justify-content-center pb-3">
                                     <Card.Header className="w-100 text-center text-capitalize font-weight-bold">{exercise.name}</Card.Header>
-                                    <Card.Body key={exercise.id} border='dark' onClick={() => handleChooseExercise(exercise)}>
+                                    <Card.Body border='dark' onClick={() => handleChooseExercise(exercise)}>
                                         <Row className="d-flex align-items-center justify-content-center">
-                                        <Card.Text>Body Part: <span className="text-capitalize">{exercise.bodyPart}</span></Card.Text>
+                                        <Card.Text>{exercise.bodyPart === 'cardio' ? <span>Type: </span> : <span>Body Part: </span>} <span className="text-capitalize">{exercise.bodyPart}</span></Card.Text>
                                         </Row>
                                         <Row className="d-flex align-items-center justify-content-center pt-2">
                                         <Card.Img variant="bottom" src={exercise.gifUrl} className="search-gif"/>
@@ -232,7 +233,7 @@ const Home = () => {
                     </Modal.Header>
                     <Modal.Body className="card">
                         <Row className="d-flex align-items-center justify-content-center">
-                            <p>Body part: <span className="font-weight-bold text-capitalize">{currentExercise.bodyPart}</span></p>
+                            <p>{currentExercise.bodyPart === 'cardio' ? <span>Type: </span> : <span>Body Part: </span>} <span className="font-weight-bold text-capitalize">{currentExercise.bodyPart}</span></p>
                         </Row>
                         <Row className="d-flex align-items-center justify-content-center">
                             <p>Equipment: <span className="font-weight-bold text-capitalize">{currentExercise.equipment}</span></p>

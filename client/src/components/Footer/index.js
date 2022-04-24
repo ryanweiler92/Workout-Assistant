@@ -34,16 +34,20 @@ const Footer = () => {
     return (
     <footer className="footer container-fluid">
         <Row className="d-flex justify-content-center align-items-center">
-            <Col className="col-6">
-        <a href="https://github.com/ryanweiler92/Workout-Assistant" target="_blank"><i className="fab fa-github icon"></i></a>
+            <Col className="col-6 align-items-center text-center">
+        <p><a href="https://github.com/ryanweiler92/Workout-Assistant" target="_blank"><i className="fab fa-github icon"></i></a></p>
             </Col>
-            <Col className="col-6 d-inline">
-            <p>Meet the creators</p>
+            <Col className="col-6 text-center">
+                
+            <p>
+            <p id="meet">Meet the creators</p>
             <OverlayTrigger trigger="click" placement="right" overlay={popover}>
                 <Button type="button">
                     <i class="fa-solid fa-bars"></i>
                 </Button>
         </OverlayTrigger>
+            </p>
+            
             </Col>
         </Row>
     </footer>

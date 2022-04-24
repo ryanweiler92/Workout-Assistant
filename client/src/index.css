@@ -87,9 +87,10 @@ footer {
   background-image: url("./assets/images/background-3.jpeg");
   background-size:cover;
   background-position: center;
-  height: 100px;
+  height: 110px;
   border: solid black 2px;
   margin-top: 100px;
+  margin-bottom: 0px;
 }
 
 footer a i {
@@ -97,6 +98,7 @@ footer a i {
   font-size: 4em;
   color: white;
   opacity: 80%;
+  padding-top: 10px;
 }
 
 footer a i:hover{
@@ -113,6 +115,11 @@ footer button {
   font-size: 2em;
   color: black;
   padding-left: 4px;
+}
+
+#meet{
+  color: white;
+  font-size: 20px;
 }
 
 @media screen and (max-width: 574px){

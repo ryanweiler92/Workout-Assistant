@@ -83,6 +83,38 @@ body{
   opacity: .8
 }
 
+footer {
+  background-image: url("./assets/images/background-3.jpeg");
+  background-size:cover;
+  background-position: center;
+  height: 100px;
+  border: solid black 2px;
+  margin-top: 100px;
+}
+
+footer a i {
+  height: 2rem;
+  font-size: 4em;
+  color: white;
+  opacity: 80%;
+}
+
+footer a i:hover{
+  opacity: 100%
+}
+
+footer button {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.small-icon{
+  height: 1rem;
+  font-size: 2em;
+  color: black;
+  padding-left: 4px;
+}
+
 @media screen and (max-width: 574px){
   .navbar .container-fluid .navbar-brand{
     font-size: 25px;

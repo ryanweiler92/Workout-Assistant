@@ -102,7 +102,7 @@ const Home = () => {
 
 
     return (
-        <>
+        <animated.div style={styles}>
             <div className="container mt-2">
             <div className="jumbotron">
                 <h1 className="display-4">Say Hello to your Workout Assistant!</h1>
@@ -135,7 +135,7 @@ const Home = () => {
 
             </div>
             </div>
-            <animated.div style={styles} className="container home-container mt-3">
+            <Container className="container home-container mt-3">
                 <Row className="d-flex align-items-center justify-content-center mt-1">
                     <Col lg="8" className="d-flex align-items-center justify-content-center mt-3">
                         <h4>Select a muscle group from the dropdown to get started!</h4>
@@ -217,11 +217,11 @@ const Home = () => {
                         )}
                 </Modal>
 
-                <Modal show={showEquipModal} onHide={handleEquipModalClose}>
+                <Modal show={showEquipModal} onHide={handleEquipModalClose} size="lg">
                     <Modal.Header closeButton>
                         <Modal.Title>Equipment</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>
+                    <Modal.Body className="card">
                         <Carousel activeIndex={equipIndex} onSelect={handleEquipSelect}>
                             <Carousel.Item>
                                 <img 
@@ -290,14 +290,11 @@ const Home = () => {
                                 </Carousel.Caption>
                             </Carousel.Item>
                         </Carousel>
-
                     </Modal.Body>
-
                 </Modal>
-
-              
-            </animated.div>
-        </>  
+                
+            </Container>
+        </animated.div>  
     ) 
 }
 

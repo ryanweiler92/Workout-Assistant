@@ -1,37 +1,83 @@
 :root{
   --primary: #1BB400;
   --secondary: #00308C;
-  --tertiary: #E4DAD6;
+  --tertiary: #F5F4F4;
   --bitter: #C8D004;
   --crayola: #0189D3;
 }
 
 body{
-  background: var(--crayola)
+  /* background: var(--crayola) */
+  background-image: url("./assets/images/turf_bg.jpeg");
+  background-position: left top;
+  background-size: 1000px;
+  background-repeat: repeat;
+  font-family: 'Merriweather', serif;
 }
 .navbar {
-  background-color: var(--primary);
+  /* background-image: url("./assets/images/background-3.jpeg"); */
+  background-position: cover;
+  font-family: 'Merriweather', serif;
 }
 
 .navbar .container-fluid .navbar-brand{
   color: white;
   font-size: 40px;
+  padding: 10px;
+  background: rgba(14, 78, 11, 0.8);
 }
 
 .navbar .container-fluid .navbar-nav .nav-link{
   color: white;
   font-size: 25px;
+  padding: 10px;
+  background: rgba(14, 78, 11, 0.8);
+  font-style: italic;
+  margin: 5px;
 }
 
+.transbox {
+  color:black;
+  background-color: black;
+  border: 1px solid black;
+  opacity: 0.6;
+}
 
 .hero {
-  background-image: url("./assets/images/gym1.jpg");
-  background-size: cover;
-  background-position: top;
-  height: 100px;
+  background-image: url("./assets/images/nav_bg_equip.jpeg");
+  background-size:cover;
+  background-position: center;
+  height: 250px;
   border: solid black 2px;
 }
 
+.home-container {
+  /* background-color: var(--tertiary); */
+  background-image: url("./assets/images/background-3.jpeg");
+  background-position: left top;
+  background-repeat: repeat;
+  border-radius: 25px;
+  color: white;
+}
+
+.home-container .card {
+  color: black
+}
+
+.jumbotron {
+  margin-top: 50px;
+}
+
+.card{
+  background-image: url("./assets/images/background-7.jpg");
+  background-position: left top;
+  background-repeat: repeat;
+}
+
+.search-gif{
+  width: 100px;
+  height: 100px;
+}
 
 
 

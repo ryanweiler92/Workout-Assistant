@@ -12,6 +12,8 @@ const Navigation = () => {
 
     return (
         <>
+                <Container fluid className="hero">
+
         <Navbar expand='lg'>
             <Container fluid>
                 <Navbar.Brand as={Link} to="/" >
@@ -64,7 +66,6 @@ const Navigation = () => {
         </Tab.Container>
         </Modal>
 
-        <Container fluid className="hero">
         </Container>
         </>
     )

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Card, Modal } from 'react-bootstrap';
 import { queryExercises } from '../utils/API';
 import Auth from '../utils/auth';
+import { useSpring, animated } from '@react-spring/web'
 
 const Home = () => {
     const [searchedExercise, setSearchedExercises] = useState([]);
@@ -56,10 +57,61 @@ const Home = () => {
         }
     }
 
+    const styles = useSpring({
+        from: {
+          opacity: 0
+        },
+        to: {
+          opacity: 1
+        },
+        config: {
+            duration: 2000
+        }
+      });
+
+      const boxShadowChange = useSpring({
+        from: {
+          boxShadow: '0px 0px 10px 5px rgb(52,183,254)'
+        },
+        to: {
+          boxShadow: '0px 0px 10px 5px rgb(255,255,255)'
+          
+        },
+        config: {
+            duration: 2000
+        },
+        loop: {reverse: true}
+    })
+
     return (
         <>
-            <Container>
-                <h1>Find exercises</h1>
+            <div className="container mt-2">
+            <div className="jumbotron">
+                <h1 className="display-4">Say Hello to your Workout Assistant!</h1>
+                <p className="lead">Find all of the exercises you need for your next workout.</p>
+                <hr className="my-4" />
+                <p>New to Workout Assistant?</p>
+                <p className="lead">
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse">
+                    Learn More
+                </button>
+                </p>
+                <div class="collapse" id="collapse">
+                    <div class="card card-body">
+                        To use Workout Assistant, first sign up for a new account with your email address. Once logged in you can search for exercises by muscle group and save these to your profile. 
+                        Navigate to your profile to view your saved exercises.
+                    </div>
+                </div>
+
+            </div>
+            </div>
+            <animated.div style={styles} className="container home-container mt-3">
+                <Row className="d-flex align-items-center justify-content-center mt-1">
+                    <Col lg="8" className="d-flex align-items-center justify-content-center mt-3">
+                        <h4>Select a muscle group from the dropdown to get started!</h4>
+                    </Col>
+                </Row>
+                <Row className="d-flex align-items-center justify-content-center mt-1">
                 <Form>
                     <Form.Row>
                         <Col>
@@ -78,45 +130,63 @@ const Home = () => {
                                 <option>Waist</option>
                             </optgroup>
                             </select>
-                            <Button variant='success' onClick={handleFormSubmit} name='searchSubmit'>
+                            <Button variant='primary' onClick={handleFormSubmit} name='searchSubmit'>
                                 Submit
                             </Button>
                         </Col>
                     </Form.Row>
                 </Form>
+                </Row>
+                <Row  className="d-flex align-items-center justify-content-center m-3">
                 {searchedExercise.map((exercise) => {
                     return (
-                        <Row key={exercise.id}>
-                            <Col xs={12} md={8}>
-                                <Card body border='dark' onClick={() => handleChooseExercise(exercise)}>
-                                    <p>{exercise.name} | {exercise.bodyPart}</p>
-                                </Card>
+                            <Col xs={12} md={8} lg={5} className="m-2">
+                                <animated.div style={boxShadowChange} className="card d-flex align-items-center justify-content-center pb-3">
+                                    <Card.Header className="w-100 text-center text-capitalize font-weight-bold">{exercise.name}</Card.Header>
+                                    <Card.Body key={exercise.id} border='dark' onClick={() => handleChooseExercise(exercise)}>
+                                        <Row className="d-flex align-items-center justify-content-center">
+                                        <Card.Text>Body Part: <span className="text-capitalize">{exercise.bodyPart}</span></Card.Text>
+                                        </Row>
+                                        <Row className="d-flex align-items-center justify-content-center pt-2">
+                                        <Card.Img variant="bottom" src={exercise.gifUrl} className="search-gif"/>
+                                        </Row>
+                                    </Card.Body>
+                                    <Button onClick={() => handleChooseExercise(exercise)}>View Exercise</Button>
+                                </animated.div>
                             </Col>
-                        </Row>
                     );
                 })}
+                </Row>
                 <Modal
                     size="lg"
                     show={showExModal}
                     onHide={() => setShowExModal(false)}
                     aria-labelledby='exercise-modal'
                 >
-                    <Modal.Header closeButton>
-                        <Modal.Title id='exercise-modal'>
-                            <p>{currentExercise.name}</p>
+                    <Modal.Header className="d-flex align-items-center justify-content-center" closeButton>
+                        <Modal.Title className="d-flex align-items-center justify-content-center" id='exercise-modal'>
+                            <p className="text-capitalize">{currentExercise.name}</p>
                         </Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>
-                        <p>Body part: {currentExercise.bodyPart}</p>
-                        <p>Equipment: {currentExercise.equipment}</p>
-                        <p>Target muscle: {currentExercise.target}</p>
-                        <img src={currentExercise.gifUrl} alt='animated demonstration' />
-                        {Auth.loggedIn() ? ( 
+                    <Modal.Body className="card">
+                        <Row className="d-flex align-items-center justify-content-center">
+                            <p>Body part: <span className="font-weight-bold text-capitalize">{currentExercise.bodyPart}</span></p>
+                        </Row>
+                        <Row className="d-flex align-items-center justify-content-center">
+                            <p>Equipment: <span className="font-weight-bold text-capitalize">{currentExercise.equipment}</span></p>
+                        </Row>
+                        <Row className="d-flex align-items-center justify-content-center">
+                            <p>Target Muscle: <span className="font-weight-bold text-capitalize">{currentExercise.target}</span></p>
+                        </Row>
+                        <Row className="d-flex align-items-center justify-content-center">
+                            <img src={currentExercise.gifUrl} alt='animated demonstration' />
+                        </Row>
+                    </Modal.Body>
+                    {Auth.loggedIn() ? ( 
                             <Button variant='success' size='lg'>Save this exercise</Button> ) : (<Button disabled variant='secondary' size='lg'>Login to save this exercise</Button>
                         )}
-                    </Modal.Body>
                 </Modal>
-            </Container>
+            </animated.div>
         </>  
     ) 
 }

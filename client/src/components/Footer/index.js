@@ -37,7 +37,7 @@ const Footer = () => {
             <Col className="col-6">
         <a href="https://github.com/ryanweiler92/Workout-Assistant" target="_blank"><i className="fab fa-github icon"></i></a>
             </Col>
-            <Col className="col-6">
+            <Col className="col-6 d-inline">
             <p>Meet the creators</p>
             <OverlayTrigger trigger="click" placement="right" overlay={popover}>
                 <Button type="button">

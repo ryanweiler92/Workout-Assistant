@@ -86,13 +86,18 @@ const Profile = () => {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
 
         if (!token) {
-        return false;
+            return false;
         }
 
         try {
-        const removed = await removeExercise({
-            variables: { exerciseId }
-        });
+            const removed = await removeExercise({
+                variables: { id: exerciseId },
+                headers: {
+                    authorization: `Bearer ${token}`
+                }
+            });
+            
+            setShowExModal(false);
         } catch (err) {
         console.error(err);
         }
@@ -105,61 +110,62 @@ const Profile = () => {
 
     return (
         <>
-            <Container>
-                <h1>TEST</h1>
-                <h2>
-                    {user.length
-                    ? `Viewing ${user.length} saved ${user.length === 1 ? 'exercise' : 'exercises'}:`
-                    : 'You have no saved exercises!'}
-                </h2>
-                <Row  className="d-flex align-items-center justify-content-center m-3">
-                    {user.map((exercise) => {
-                        return (
-                                <Col xs={12} md={8} lg={5} className="m-2" key={exercise.id}>
-                                    <animated.div style={boxShadowChange} className="card d-flex align-items-center justify-content-center pb-3">
-                                        <Card.Header className="w-100 text-center text-capitalize font-weight-bold">{exercise.name}</Card.Header>
-                                        <Card.Body border='dark' onClick={() => handleChooseExercise(exercise)}>
-                                            <Row className="d-flex align-items-center justify-content-center">
-                                                <Card.Text>{exercise.bodyPart === 'cardio' ? <span>Type: </span> : <span>Body Part: </span>} <span className="text-capitalize">{exercise.bodyPart}</span></Card.Text>
-                                            </Row>
-                                            <Row className="d-flex align-items-center justify-content-center pt-2">
-                                                <Card.Img variant="bottom" src={exercise.gifUrl} className="search-gif"/>
-                                            </Row>
-                                        </Card.Body>
-                                        <Button onClick={() => handleChooseExercise(exercise)}>View Exercise</Button>
-                                    </animated.div>
-                                </Col>
-                        );
-                    })}
-                </Row>
-                <Modal
-                    size="lg"
-                    show={showExModal}
-                    onHide={() => setShowExModal(false)}
-                    aria-labelledby='saved-exercise-modal'
-                >
-                    <Modal.Header className="d-flex align-items-center justify-content-center" closeButton>
-                        <Modal.Title className="d-flex align-items-center justify-content-center" id='saved-exercise-modal'>
-                            <p className="text-capitalize">{currentExercise.name}</p>
-                        </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body className="card">
-                        <Row className="d-flex align-items-center justify-content-center">
-                            <p>{currentExercise.bodyPart === 'cardio' ? <span>Type: </span> : <span>Body Part: </span>} <span className="font-weight-bold text-capitalize">{currentExercise.bodyPart}</span></p>
-                        </Row>
-                        <Row className="d-flex align-items-center justify-content-center">
-                            <p>Equipment: <span className="font-weight-bold text-capitalize">{currentExercise.equipment}</span></p>
-                        </Row>
-                        <Row className="d-flex align-items-center justify-content-center">
-                            <p>Target Muscle: <span className="font-weight-bold text-capitalize">{currentExercise.target}</span></p>
-                        </Row>
-                        <Row className="d-flex align-items-center justify-content-center">
-                            <img src={currentExercise.gifUrl} alt='animated demonstration' />
-                        </Row>
-                    </Modal.Body>
-                    <Button variant='danger' size='lg' onClick={() => handleRemoveExercise(currentExercise.id)}>Remove this exercise</Button> 
-                </Modal>
-            </Container>
+            <animated.div style={styles}>
+                <Container>
+                    <h2>
+                        {user.length
+                        ? `Viewing ${user.length} saved ${user.length === 1 ? 'exercise' : 'exercises'}:`
+                        : 'You have no saved exercises!'}
+                    </h2>
+                    <Row  className="d-flex align-items-center justify-content-center mt-3">
+                        {user.map((exercise) => {
+                            return (
+                                    <Col xs={12} md={8} lg={5} className="m-2" key={exercise.id}>
+                                        <animated.div style={boxShadowChange} className="card d-flex align-items-center justify-content-center pb-3">
+                                            <Card.Header className="w-100 text-center text-capitalize font-weight-bold">{exercise.name}</Card.Header>
+                                            <Card.Body border='dark' onClick={() => handleChooseExercise(exercise)}>
+                                                <Row className="d-flex align-items-center justify-content-center">
+                                                    <Card.Text>{exercise.bodyPart === 'cardio' ? <span>Type: </span> : <span>Body Part: </span>} <span className="text-capitalize">{exercise.bodyPart}</span></Card.Text>
+                                                </Row>
+                                                <Row className="d-flex align-items-center justify-content-center pt-2">
+                                                    <Card.Img variant="bottom" src={exercise.gifUrl} className="search-gif"/>
+                                                </Row>
+                                            </Card.Body>
+                                            <Button onClick={() => handleChooseExercise(exercise)}>View Exercise</Button>
+                                        </animated.div>
+                                    </Col>
+                            );
+                        })}
+                    </Row>
+                    <Modal
+                        size="lg"
+                        show={showExModal}
+                        onHide={() => setShowExModal(false)}
+                        aria-labelledby='saved-exercise-modal'
+                    >
+                        <Modal.Header className="d-flex align-items-center justify-content-center" closeButton>
+                            <Modal.Title className="d-flex align-items-center justify-content-center" id='saved-exercise-modal'>
+                                <p className="text-capitalize">{currentExercise.name}</p>
+                            </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body className="card">
+                            <Row className="d-flex align-items-center justify-content-center">
+                                <p>{currentExercise.bodyPart === 'cardio' ? <span>Type: </span> : <span>Body Part: </span>} <span className="font-weight-bold text-capitalize">{currentExercise.bodyPart}</span></p>
+                            </Row>
+                            <Row className="d-flex align-items-center justify-content-center">
+                                <p>Equipment: <span className="font-weight-bold text-capitalize">{currentExercise.equipment}</span></p>
+                            </Row>
+                            <Row className="d-flex align-items-center justify-content-center">
+                                <p>Target Muscle: <span className="font-weight-bold text-capitalize">{currentExercise.target}</span></p>
+                            </Row>
+                            <Row className="d-flex align-items-center justify-content-center">
+                                <img src={currentExercise.gifUrl} alt='animated demonstration' />
+                            </Row>
+                        </Modal.Body>
+                        <Button variant='danger' size='lg' onClick={() => handleRemoveExercise(currentExercise.id)}>Remove this exercise</Button> 
+                    </Modal>
+                </Container>
+            </animated.div>
         </>
     );
 };

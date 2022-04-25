@@ -49,7 +49,7 @@ type Auth {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     updateUser(username: String!, email: String!, password: String!): User
-    removeExercise(id: ID!): User
+    removeExercise(id: String!): User
     saveExercise(name: String, bodyPart: String, id: String, equipment: String, gifUrl: String, target: String): User
   }
 `;

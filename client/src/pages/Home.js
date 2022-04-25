@@ -76,6 +76,10 @@ const Home = () => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+
+        // CODE FOR HIDING JUMBOTRON AFTER SEARCHING
+        // const jumbo = document.querySelector(".jumbotron");
+        // jumbo.classList.add("hideJumbo");
     
         try {
             const response = await queryExercises(searchInput);

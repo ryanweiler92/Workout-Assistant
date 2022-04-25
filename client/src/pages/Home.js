@@ -45,11 +45,13 @@ const Home = () => {
     const [savedIds, setSavedIds] = useState([]);
 
     useEffect(() => {
-        function handleSavedUpdate(userData) {
-          setSavedIds(userData);
+        if (Auth.loggedIn()) {
+            function handleSavedUpdate(userData) {
+            setSavedIds(userData);
+            }
+                
+            handleSavedUpdate(user)
         }
-            
-        handleSavedUpdate(user)
       }, [user]); 
 
     function checkButton(currentExercise) {
@@ -94,7 +96,7 @@ const Home = () => {
                 target: exercise.target
             }));
 
-            setSearchedExercises(exerciseData)
+            setSearchedExercises(exerciseData);
             // setSearchInput('');
         } catch (err){
             console.error(err)

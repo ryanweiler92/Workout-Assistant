@@ -124,6 +124,11 @@ footer button {
   padding-right: 10px;
 }
 
+.select {
+    display: inline-flex;
+    width: 200px;
+}
+
 @media screen and (max-width: 574px){
   .navbar .container-fluid .navbar-brand{
     font-size: 25px;

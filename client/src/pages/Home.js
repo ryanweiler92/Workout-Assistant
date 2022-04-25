@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Card, Modal, Carousel } from 'react-bootstrap';
 import { queryExercises } from '../utils/API';
-import { useQuery, useMutation } from '@apollo/client'
-import { SAVE_EXERCISE } from '../utils/mutations'
+import { useQuery, useMutation } from '@apollo/client';
+import { QUERY_USER } from '../utils/queries';
+import { SAVE_EXERCISE } from '../utils/mutations';
 import Auth from '../utils/auth';
-import { useSpring, animated } from '@react-spring/web'
+import { useSpring, animated } from '@react-spring/web';
 
 const Home = () => {
     const [saveExercise] = useMutation(SAVE_EXERCISE);
@@ -34,6 +35,33 @@ const Home = () => {
       setEquipIndex(selectedIndex);
     };
     //End Equipment Modal/Carosuel Controls
+
+    // one query for when page renders
+    const { data: userDataMe } = useQuery(QUERY_USER);
+    // console.log(userDataMe)
+    const user = userDataMe?.user.savedExercises || {};
+    // console.log(user)
+
+    const [savedIds, setSavedIds] = useState([]);
+
+    useEffect(() => {
+        if (Auth.loggedIn()) {
+            function handleSavedUpdate(userData) {
+            setSavedIds(userData);
+            }
+                
+            handleSavedUpdate(user)
+        }
+      }, [user]); 
+
+    function checkButton(currentExercise) {
+        for (let i = 0; i < savedIds.length; i++) {
+            if (currentExercise.id === savedIds[i].id) {
+                return false; 
+            }
+        }
+        return true;
+    }
 
     // from stackoverflow user abdennour toumi
     function randomize(array) {
@@ -68,7 +96,7 @@ const Home = () => {
                 target: exercise.target
             }));
 
-            setSearchedExercises(exerciseData)
+            setSearchedExercises(exerciseData);
             // setSearchInput('');
         } catch (err){
             console.error(err)
@@ -98,6 +126,8 @@ const Home = () => {
                     authorization: `Bearer ${token}`
                 }
             });
+
+
 
         } catch (err) {
             console.error(err)
@@ -131,7 +161,6 @@ const Home = () => {
         loop: {reverse: true}
     })
     //end animation controls 
-
 
     return (
         <animated.div style={styles}>
@@ -177,7 +206,7 @@ const Home = () => {
                 <Form>
                     <Form.Row>
                         <Col>
-                            <select className='selectpicker' onChange={(e) => setSearchInput(e.target.value)}>
+                            <select className='select' onChange={(e) => setSearchInput(e.target.value)}>
                                 <option>All types</option>
                                 <option>Body weight</option>
                             <optgroup label='By body part'>
@@ -245,15 +274,10 @@ const Home = () => {
                             <img src={currentExercise.gifUrl} alt='animated demonstration' />
                         </Row>
                     </Modal.Body>
-                    {/* {Auth.loggedIn() && (
-                        <Button
-                        disabled={}
-                    )} */}
 
-
-                    {Auth.loggedIn() ? ( 
-                            <Button variant='success' size='lg' onClick={() => handleSaveExercise(currentExercise.id)}>Save this exercise</Button> ) : (<Button disabled variant='secondary' size='lg'>Login to save this exercise</Button>
-                        )}
+                    {!checkButton(currentExercise) && Auth.loggedIn() ? ( <Button disabled variant='secondary' size='lg'>Exercise already saved</Button> ) : Auth.loggedIn() && checkButton(currentExercise) ? (
+                        <Button variant='success' size='lg' onClick={() => handleSaveExercise(currentExercise.id)}>Save this exercise</Button> ) : ( <Button disabled variant='secondary' size='lg'>Login to save this exercise</Button>
+                    )}
                 </Modal>
 
                 <Modal show={showEquipModal} onHide={handleEquipModalClose} size="lg">
@@ -331,9 +355,9 @@ const Home = () => {
                         </Carousel>
                     </Modal.Body>
                 </Modal>
-                
             </Container>
-        </animated.div>  
+        </animated.div>
+        
     ) 
 }
 

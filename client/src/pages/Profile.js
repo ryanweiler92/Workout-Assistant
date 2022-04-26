@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Modal, Card, Button } from 'react-bootstrap';
+import { Container, Row, Col, Modal, Card, Button, Collapse } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { REMOVE_EXERCISE } from '../utils/mutations';
 import { QUERY_USER } from '../utils/queries';
 import Auth from '../utils/auth';
+import Sidebar from '../components/Sidebar'
 import { useSpring, animated } from '@react-spring/web'
+import { Drawer, } from 'react-bootstrap-drawer';
 
 const Profile = () => {
     const [currentExercise, setCurrentExercise] = useState('');
@@ -24,6 +26,16 @@ const Profile = () => {
     const [userData, setUserData] = useState();
 
     const userDataLength = Object.keys(user).length;
+
+        //Routine Modal Controls
+        const [showRoutineModal, setRoutineModal] = useState(false);
+
+        const handleRoutineModalClose = () => setRoutineModal(false);
+        const handleRoutineModalShow = () => setRoutineModal(true);
+    
+        //end routine modal controls
+
+        const [openSidebar, setSidebarOpen] = useState(true);
 
 //   useEffect(() => {
 //     const getUserData = async () => {
@@ -108,15 +120,61 @@ const Profile = () => {
         return <h2>Save some exercises!</h2>;
     }
 
+
+
     return (
         <>
-            <animated.div style={styles}>
+            <animated.div style={styles} className="container-fluid">
+            <Row className="flex-xl-nowrap">
+				<Col xs={ 12 } md={ 4 } lg={ 2 }> 
+                    <Drawer className="sidebar">
+			            <Collapse in={ openSidebar }>
+				            <Drawer.Overflow>
+					            <Drawer.ToC>
+						            <Drawer.Header href="/">Routine</Drawer.Header>
+
+						            <Drawer.Nav>
+							            <Drawer.Item href="/settings">Settings</Drawer.Item>
+						            </Drawer.Nav>
+					            </Drawer.ToC>
+				            </Drawer.Overflow>
+			            </Collapse>
+		            </Drawer>
+                </Col>
+				<Col xs={ 12 } md={ 8 } lg={ 10 } >
                 <Container>
-                    <h2>
+                    <div className="container mt-2">
+                    <div className="jumbotron">
+                    <h2 className="display-5"> Hello {userDataMe?.user.username}! 
                         {user.length
-                        ? `Viewing ${user.length} saved ${user.length === 1 ? 'exercise' : 'exercises'}:`
-                        : 'You have no saved exercises!'}
+                        ? ` Viewing ${user.length} saved ${user.length === 1 ? 'exercise' : 'exercises'}:`
+                        : ' You have no saved exercises!'}
                     </h2>
+                    <hr className="my-4" />
+                <Row>
+                    <Col>
+                <p className="lead">
+                <button className="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse">
+                    Instructions
+                </button>
+                </p>
+                    </Col>
+                    <Col>
+                        <p className="lead">
+                        <Button variant="primary" onClick={handleRoutineModalShow} >
+                            Routines
+                        </Button>
+                        </p>
+                    </Col>
+                </Row>
+                <div className="collapse" id="collapse">
+                    <div className="card card-body">
+                        To add exercises to your routine simply click the add-to-routine button on the exercise saved to your profile. Click
+                        the routines button to see your current routine.
+                    </div>
+                </div>
+                    </div>
+                    </div>
                     <Row  className="d-flex align-items-center justify-content-center mt-3">
                         {user.map((exercise) => {
                             return (
@@ -164,7 +222,21 @@ const Profile = () => {
                         </Modal.Body>
                         <Button variant='danger' size='lg' onClick={() => handleRemoveExercise(currentExercise.id)}>Remove this exercise</Button> 
                     </Modal>
+
+                    <Modal 
+                        
+                        aria-labelledby="routine-modal"
+                        show={showRoutineModal}
+                        onHide={() => setRoutineModal(false)}>
+                        <Modal.Header className="d-flex align-items-center justify-content-center" closeButton>
+                            <Modal.Title className="d-flex align-items-center justify-content-center">
+                                <h2>Routine</h2>
+                            </Modal.Title>
+                        </Modal.Header>
+                    </Modal>
                 </Container>
+                </Col>
+                </Row>
             </animated.div>
         </>
     );

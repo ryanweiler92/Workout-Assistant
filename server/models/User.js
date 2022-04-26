@@ -19,7 +19,8 @@ const userSchema = new Schema(
         type: String,
         required: true,
       },
-      savedExercises: [exerciseSchema]
+      savedExercises: [exerciseSchema],
+      routine: [exerciseSchema]
     },
     {
       toJSON: {

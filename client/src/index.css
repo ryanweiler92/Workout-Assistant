@@ -136,6 +136,7 @@ footer button {
 .sidebar{
   background: white;
   height: 1000px;
+  margin-left: 0px;
 }
 
 @media screen and (max-width: 574px){

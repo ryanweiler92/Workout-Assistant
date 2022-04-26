@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Modal, Card, Button, Collapse } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
-import { REMOVE_EXERCISE } from '../utils/mutations';
+import { REMOVE_EXERCISE, SAVE_ROUTINE } from '../utils/mutations';
 import { QUERY_USER } from '../utils/queries';
 import Auth from '../utils/auth';
 import Sidebar from '../components/Sidebar'
@@ -9,6 +9,10 @@ import { useSpring, animated } from '@react-spring/web'
 import { Drawer, } from 'react-bootstrap-drawer';
 
 const Profile = () => {
+
+    //Routine Stuff
+    const [saveRoutine] = useMutation(SAVE_ROUTINE);
+
     const [currentExercise, setCurrentExercise] = useState('');
 
     const [searchInput, setSearchInput] = useState('All types');
@@ -189,7 +193,10 @@ const Profile = () => {
                                                     <Card.Img variant="bottom" src={exercise.gifUrl} className="search-gif"/>
                                                 </Row>
                                             </Card.Body>
-                                            <Button onClick={() => handleChooseExercise(exercise)}>View Exercise</Button>
+                                            <Row>
+                                            <Col><Button onClick={() => handleChooseExercise(exercise)}>View Exercise</Button></Col>
+                                            <Col><Button className="btn-success">Add To Routine</Button></Col>
+                                            </Row>
                                         </animated.div>
                                     </Col>
                             );

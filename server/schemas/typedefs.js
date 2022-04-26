@@ -30,6 +30,7 @@ type User {
   username: String
   email: String
   savedExercises: [Exercise]
+  routine: [Exercise]
 }
 
 type Auth {
@@ -51,6 +52,8 @@ type Auth {
     updateUser(username: String!, email: String!, password: String!): User
     removeExercise(id: String!): User
     saveExercise(name: String, bodyPart: String, id: String, equipment: String, gifUrl: String, target: String): User
+    saveRoutine(name: String, bodyPart: String, id: String, equipment: String, gifUrl: String, target: String): User
+    updateRoutine(id: String!): User
   }
 `;
 

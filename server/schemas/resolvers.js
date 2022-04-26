@@ -104,7 +104,31 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
-    }
+    },
+    saveRoutine: async (parent, { name, bodyPart, id, equipment, gifUrl, target }, context) => {
+      if (context.user) {
+        const updatedUser = await User
+        .findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: {routine: { name, bodyPart, id, equipment, gifUrl, target }}},
+          { new: true }
+        );
+        return updatedUser
+      }
+      throw new AuthenticationError('Not logged in');
+    },
+    updateRoutine: async (parent, {id}, context) => {
+      if (context.user) {
+        const updatedUser = await User
+        .findOneAndUpdate(
+          {_id: context.user._id},
+          { $pull: {routine: {id}}},
+          { new: true }
+        )
+        return updatedUser
+      }
+      throw new AuthenticationError('Not logged in');
+    },
   }
 }
 

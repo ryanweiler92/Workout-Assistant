@@ -61,3 +61,53 @@ mutation removeExercise($id:String!){
     }
   }
 `
+
+export const SAVE_ROUTINE = gql `
+mutation saveRoutine($name: String, $bodyPart: String, $id: String, $equipment: String!, $gifUrl: String, $target: String){
+    saveRoutine(name: $name, bodyPart: $bodyPart, id: $id, equipment: $equipment, gifUrl: $gifUrl, target: $target){
+        _id
+        username
+        email
+        savedExercises{
+          name
+          bodyPart
+          id
+          equipment
+          gifUrl
+          target
+        }
+        routine{
+          name
+          bodyPart
+          id
+          equipment
+          gifUrl
+          target
+        }
+    }
+  }
+`
+
+export const UPDATE_ROUTINE = gql `
+mutation updateRoutine($id: String!){
+  updateRoutine(id: $id){
+    username
+    email
+    _id
+    savedExercises{
+      name
+      bodyPart
+      id
+      equipment
+      gifUrl
+    }
+    routine{
+      name
+      bodyPart
+      id
+      equipment
+      gifUrl
+    }
+  }
+}
+`

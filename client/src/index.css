@@ -133,6 +133,13 @@ footer button {
     display: none;
 }
 
+.sidebar{
+  background: white;
+  height: 1000px;
+  margin-left: 0px;
+  border: 4px solid black;
+}
+
 @media screen and (max-width: 574px){
   .navbar .container-fluid .navbar-brand{
     font-size: 25px;

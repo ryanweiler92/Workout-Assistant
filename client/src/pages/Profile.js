@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Modal, Card, Button, Collapse } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
-import { REMOVE_EXERCISE, SAVE_ROUTINE } from '../utils/mutations';
+import { REMOVE_EXERCISE, SAVE_ROUTINE, UPDATE_ROUTINE } from '../utils/mutations';
 import { QUERY_USER } from '../utils/queries';
 import Auth from '../utils/auth';
 import { useSpring, animated } from '@react-spring/web'
@@ -11,6 +11,8 @@ const Profile = () => {
 
     //Routine Stuff
     const [saveRoutine] = useMutation(SAVE_ROUTINE);
+
+    const [updateRoutine] = useMutation(UPDATE_ROUTINE);
 
     const handleSaveRoutine = async (currentExercise) => {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -97,6 +99,25 @@ const Profile = () => {
         setShowExModal(true);
     };
 
+    const handleUpdateRoutine = async (exerciseId) => {
+        const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+        if (!token) {
+            return false;
+        }
+
+        try {
+            const removed = await updateRoutine({
+                variables: { id: exerciseId },
+                headers: {
+                    authorization: `Bearer ${token}`
+                }
+            });
+        } catch (err) {
+        console.error(err);
+        }
+    };
+
     const handleRemoveExercise = async (exerciseId) => {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -137,7 +158,7 @@ const Profile = () => {
 						            <h1 className="text-center">Routine</h1>
 					            </Drawer.ToC>
                                 <Row className="d-flex align-items-center justify-content-center mt-1">
-                                    {user.map((exercise) => {
+                                    {userRoutine.map((exercise) => {
                                         return (
                                             <Col key={exercise.id}>
                                                 <div className="card d-flex align-items-center justify-content-center pb-3">
@@ -157,7 +178,7 @@ const Profile = () => {
                                                         </Row>
                                                     </Card.Body>
                                                     <Row>
-                                                        <Button className="btn-danger">Remove Exercise</Button>
+                                                        <Button onClick={() => handleUpdateRoutine(exercise.id)} className="btn-danger">Remove Exercise</Button>
                                                     </Row>
                                                 </div>
                                             </Col>

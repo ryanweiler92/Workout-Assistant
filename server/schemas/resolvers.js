@@ -117,6 +117,18 @@ const resolvers = {
       }
       throw new AuthenticationError('Not logged in');
     },
+    updateRoutine: async (parent, {id}, context) => {
+      if (context.user) {
+        const updatedUser = await User
+        .findOneAndUpdate(
+          {_id: context.user._id},
+          { $pull: {routine: {id}}},
+          { new: true }
+        )
+        return updatedUser
+      }
+      throw new AuthenticationError('Not logged in');
+    },
   }
 }
 

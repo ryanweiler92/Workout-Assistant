@@ -14,6 +14,14 @@ query user{
           gifUrl
           target
       }
+      routine{
+        name
+        bodyPart
+        id
+        equipment
+        gifUrl
+        target
+    }
     }
   }
 `

@@ -30,6 +30,7 @@ type User {
   username: String
   email: String
   savedExercises: [Exercise]
+  routine: [Exercise]
 }
 
 type Auth {

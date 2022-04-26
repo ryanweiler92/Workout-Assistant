@@ -4,7 +4,6 @@ import { useQuery, useMutation } from '@apollo/client';
 import { REMOVE_EXERCISE, SAVE_ROUTINE } from '../utils/mutations';
 import { QUERY_USER } from '../utils/queries';
 import Auth from '../utils/auth';
-import Sidebar from '../components/Sidebar'
 import { useSpring, animated } from '@react-spring/web'
 import { Drawer, } from 'react-bootstrap-drawer';
 
@@ -12,6 +11,36 @@ const Profile = () => {
 
     //Routine Stuff
     const [saveRoutine] = useMutation(SAVE_ROUTINE);
+
+    const handleSaveRoutine = async (currentExercise) => {
+        const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+        if (!token) {
+            return false;
+        }
+
+        try {
+            // console.log(currentExercise)
+            // console.log(currentExercise?.name)
+            const response = await saveRoutine({
+                variables: {
+                    bodyPart: currentExercise.bodyPart,
+                    equipment: currentExercise.equipment,
+                    gifUrl: currentExercise.gifUrl,
+                    id: currentExercise.id, 
+                    name: currentExercise.name,
+                    target: currentExercise.target
+                },
+                headers: {
+                    authorization: `Bearer ${token}`
+                }
+            });
+        } catch (err) {
+        console.error(err);
+        }
+    };
+
+    //end routine stuff
 
     const [currentExercise, setCurrentExercise] = useState('');
 
@@ -31,39 +60,9 @@ const Profile = () => {
 
     const userDataLength = Object.keys(user).length;
 
-        //Routine Modal Controls
-        const [showRoutineModal, setRoutineModal] = useState(false);
-
-        const handleRoutineModalClose = () => setRoutineModal(false);
-        const handleRoutineModalShow = () => setRoutineModal(true);
-    
-        //end routine modal controls
-
         const [openSidebar, setSidebarOpen] = useState(true);
 
-//   useEffect(() => {
-//     const getUserData = async () => {
-//       try {
-//         const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-//         if (!token) {
-//           return false;
-//         }
-        
-//         const test = await userDataLength;
-        
-//         if (!test) {
-//           throw new Error('something went wrong!');
-//         }
-        
-//         setUserData(user);
-//       } catch (err) {
-//         console.error(err);
-//       }
-//     };
-
-//     getUserData();
-//   }, [user, userDataLength]);
 
     //animation controls 
     const styles = useSpring({
@@ -163,13 +162,6 @@ const Profile = () => {
                 </button>
                 </p>
                     </Col>
-                    <Col>
-                        <p className="lead">
-                        <Button variant="primary" onClick={handleRoutineModalShow} >
-                            Routines
-                        </Button>
-                        </p>
-                    </Col>
                 </Row>
                 <div className="collapse" id="collapse">
                     <div className="card card-body">
@@ -194,8 +186,7 @@ const Profile = () => {
                                                 </Row>
                                             </Card.Body>
                                             <Row>
-                                            <Col><Button onClick={() => handleChooseExercise(exercise)}>View Exercise</Button></Col>
-                                            <Col><Button className="btn-success">Add To Routine</Button></Col>
+                                            <Button onClick={() => handleChooseExercise(exercise)}>View Exercise</Button>
                                             </Row>
                                         </animated.div>
                                     </Col>
@@ -228,18 +219,7 @@ const Profile = () => {
                             </Row>
                         </Modal.Body>
                         <Button variant='danger' size='lg' onClick={() => handleRemoveExercise(currentExercise.id)}>Remove this exercise</Button> 
-                    </Modal>
-
-                    <Modal 
-                        
-                        aria-labelledby="routine-modal"
-                        show={showRoutineModal}
-                        onHide={() => setRoutineModal(false)}>
-                        <Modal.Header className="d-flex align-items-center justify-content-center" closeButton>
-                            <Modal.Title className="d-flex align-items-center justify-content-center">
-                                <h2>Routine</h2>
-                            </Modal.Title>
-                        </Modal.Header>
+                        <Button onClick={() => handleSaveRoutine(currentExercise)} className="btn-success">Add To Routine</Button>
                     </Modal>
                 </Container>
                 </Col>
@@ -250,3 +230,28 @@ const Profile = () => {
 };
 
 export default Profile;
+
+
+//   useEffect(() => {
+//     const getUserData = async () => {
+//       try {
+//         const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+//         if (!token) {
+//           return false;
+//         }
+        
+//         const test = await userDataLength;
+        
+//         if (!test) {
+//           throw new Error('something went wrong!');
+//         }
+        
+//         setUserData(user);
+//       } catch (err) {
+//         console.error(err);
+//       }
+//     };
+
+//     getUserData();
+//   }, [user, userDataLength]);

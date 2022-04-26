@@ -20,8 +20,6 @@ const Profile = () => {
         }
 
         try {
-            // console.log(currentExercise)
-            // console.log(currentExercise?.name)
             const response = await saveRoutine({
                 variables: {
                     bodyPart: currentExercise.bodyPart,
@@ -40,6 +38,7 @@ const Profile = () => {
         }
     };
 
+
     //end routine stuff
 
     const [currentExercise, setCurrentExercise] = useState('');
@@ -49,11 +48,12 @@ const Profile = () => {
     const [showExModal, setShowExModal] = useState(false);
 
     const { data: userDataMe } = useQuery(QUERY_USER);
-    console.log(userDataMe)
 
     const user = userDataMe?.user.savedExercises || {};
-    console.log(user)
 
+    const userRoutine = userDataMe?.user.routine || {};
+    console.log(userRoutine)
+    
     const [removeExercise, { error }] = useMutation(REMOVE_EXERCISE);
 
     const [userData, setUserData] = useState();
@@ -134,12 +134,36 @@ const Profile = () => {
 			            <Collapse in={ openSidebar }>
 				            <Drawer.Overflow>
 					            <Drawer.ToC>
-						            <Drawer.Header href="/">Routine</Drawer.Header>
-
-						            <Drawer.Nav>
-							            <Drawer.Item href="/settings">Settings</Drawer.Item>
-						            </Drawer.Nav>
+						            <h1 className="text-center">Routine</h1>
 					            </Drawer.ToC>
+                                <Row className="d-flex align-items-center justify-content-center mt-1">
+                                    {user.map((exercise) => {
+                                        return (
+                                            <Col key={exercise.id}>
+                                                <div className="card d-flex align-items-center justify-content-center pb-3">
+                                                    <Card.Header className="w-100 text-center text-capitalize font-weight-bold">{exercise.name}</Card.Header>
+                                                    <Card.Body border='dark'>
+                                                        <Row className="d-flex align-items-center justify-content-center text-capitalize">
+                                                            <Card.Text>Body Part: {exercise.bodyPart}</Card.Text>
+                                                        </Row>
+                                                        <Row className="d-flex align-items-center justify-content-center text-capitalize">
+                                                            <Card.Text>Equipment: {exercise.equipment}</Card.Text>
+                                                        </Row>
+                                                        <Row className="d-flex align-items-center justify-content-center text-capitalize">
+                                                            <Card.Text>Target: {exercise.equipment}</Card.Text>
+                                                        </Row>
+                                                        <Row className="d-flex align-items-center justify-content-center">
+                                                            <Card.Img variant="bottom" src={exercise.gifUrl} className="search-gif" />
+                                                        </Row>
+                                                    </Card.Body>
+                                                    <Row>
+                                                        <Button className="btn-danger">Remove Exercise</Button>
+                                                    </Row>
+                                                </div>
+                                            </Col>
+                                        );
+                                    })}
+                                </Row>
 				            </Drawer.Overflow>
 			            </Collapse>
 		            </Drawer>

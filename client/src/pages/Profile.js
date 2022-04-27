@@ -53,6 +53,8 @@ const Profile = () => {
 
     const user = userDataMe?.user.savedExercises || {};
 
+    const filter = handleFilterExercises(user);
+
     const userRoutine = userDataMe?.user.routine || {};
     console.log(userRoutine)
     
@@ -139,12 +141,22 @@ const Profile = () => {
         }
     };
 
+    function handleFilterExercises(savedExercises) {
+        if (searchInput === 'All types') {
+            return savedExercises;
+        } else if (searchInput === 'Body weight') {
+            const exercises = savedExercises.filter(exercise => exercise.equipment === 'body weight');
+            return exercises;
+        } else {
+            const exercises = savedExercises.filter(exercise => exercise.bodyPart === searchInput.toLowerCase());
+            return exercises;
+        }
+    }
+
     // if data isn't here yet, say so
     if (!userDataLength) {
         return <h2>Save some exercises!</h2>;
     }
-
-
 
     return (
         <>

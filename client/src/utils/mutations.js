@@ -88,6 +88,110 @@ mutation saveRoutine($name: String, $bodyPart: String, $id: String, $equipment: 
   }
 `
 
+export const SAVE_ROUTINE2 = gql `
+mutation saveRoutine($name: String, $bodyPart: String, $id: String, $equipment: String!, $gifUrl: String, $target: String){
+    saveRoutine(name: $name, bodyPart: $bodyPart, id: $id, equipment: $equipment, gifUrl: $gifUrl, target: $target){
+        _id
+        username
+        email
+        savedExercises{
+          name
+          bodyPart
+          id
+          equipment
+          gifUrl
+          target
+        }
+        routine2{
+          name
+          bodyPart
+          id
+          equipment
+          gifUrl
+          target
+        }
+    }
+  }
+`
+
+export const SAVE_ROUTINE3 = gql `
+mutation saveRoutine($name: String, $bodyPart: String, $id: String, $equipment: String!, $gifUrl: String, $target: String){
+    saveRoutine(name: $name, bodyPart: $bodyPart, id: $id, equipment: $equipment, gifUrl: $gifUrl, target: $target){
+        _id
+        username
+        email
+        savedExercises{
+          name
+          bodyPart
+          id
+          equipment
+          gifUrl
+          target
+        }
+        routine3{
+          name
+          bodyPart
+          id
+          equipment
+          gifUrl
+          target
+        }
+    }
+  }
+`
+
+export const SAVE_ROUTINE4 = gql `
+mutation saveRoutine($name: String, $bodyPart: String, $id: String, $equipment: String!, $gifUrl: String, $target: String){
+    saveRoutine(name: $name, bodyPart: $bodyPart, id: $id, equipment: $equipment, gifUrl: $gifUrl, target: $target){
+        _id
+        username
+        email
+        savedExercises{
+          name
+          bodyPart
+          id
+          equipment
+          gifUrl
+          target
+        }
+        routine4{
+          name
+          bodyPart
+          id
+          equipment
+          gifUrl
+          target
+        }
+    }
+  }
+`
+
+export const SAVE_ROUTINE5 = gql `
+mutation saveRoutine($name: String, $bodyPart: String, $id: String, $equipment: String!, $gifUrl: String, $target: String){
+    saveRoutine(name: $name, bodyPart: $bodyPart, id: $id, equipment: $equipment, gifUrl: $gifUrl, target: $target){
+        _id
+        username
+        email
+        savedExercises{
+          name
+          bodyPart
+          id
+          equipment
+          gifUrl
+          target
+        }
+        routine5{
+          name
+          bodyPart
+          id
+          equipment
+          gifUrl
+          target
+        }
+    }
+  }
+`
+
 export const UPDATE_ROUTINE = gql `
 mutation updateRoutine($id: String!){
   updateRoutine(id: $id){

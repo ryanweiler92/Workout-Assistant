@@ -192,7 +192,7 @@ const Home = () => {
                     </Col>
                 </Row>
                 <div className="collapse" id="collapse">
-                    <div className="card card-body">
+                    <div className="card card-body padding-top">
                         To use Workout Assistant, first sign up for a new account with your email address. Once logged in you can search for exercises by muscle group and save these to your profile. 
                         Navigate to your profile to view your saved exercises.
                     </div>
@@ -247,7 +247,9 @@ const Home = () => {
                                         <Card.Img variant="bottom" src={exercise.gifUrl} className="search-gif"/>
                                         </Row>
                                     </Card.Body>
-                                    <Button onClick={() => handleChooseExercise(exercise)}>View Exercise</Button>
+                                    <Row className="d-flex align-items-center justify-content-center">
+                                        {!checkButton(exercise) && <span className="check">✔</span>}<Button onClick={() => handleChooseExercise(exercise)}>View Exercise</Button>
+                                    </Row>
                                 </animated.div>
                             </Col>
                     );

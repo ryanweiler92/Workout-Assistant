@@ -20,7 +20,11 @@ const userSchema = new Schema(
         required: true,
       },
       savedExercises: [exerciseSchema],
-      routine: [exerciseSchema]
+      routine: [exerciseSchema],
+      routine2: [exerciseSchema],
+      routine3: [exerciseSchema],
+      routine4: [exerciseSchema],
+      routine5: [exerciseSchema],
     },
     {
       toJSON: {

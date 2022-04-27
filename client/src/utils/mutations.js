@@ -89,8 +89,8 @@ mutation saveRoutine($name: String, $bodyPart: String, $id: String, $equipment: 
 `
 
 export const SAVE_ROUTINE2 = gql `
-mutation saveRoutine($name: String, $bodyPart: String, $id: String, $equipment: String!, $gifUrl: String, $target: String){
-    saveRoutine(name: $name, bodyPart: $bodyPart, id: $id, equipment: $equipment, gifUrl: $gifUrl, target: $target){
+mutation saveRoutine2($name: String, $bodyPart: String, $id: String, $equipment: String!, $gifUrl: String, $target: String){
+    saveRoutine2(name: $name, bodyPart: $bodyPart, id: $id, equipment: $equipment, gifUrl: $gifUrl, target: $target){
         _id
         username
         email
@@ -115,8 +115,8 @@ mutation saveRoutine($name: String, $bodyPart: String, $id: String, $equipment: 
 `
 
 export const SAVE_ROUTINE3 = gql `
-mutation saveRoutine($name: String, $bodyPart: String, $id: String, $equipment: String!, $gifUrl: String, $target: String){
-    saveRoutine(name: $name, bodyPart: $bodyPart, id: $id, equipment: $equipment, gifUrl: $gifUrl, target: $target){
+mutation saveRoutine3($name: String, $bodyPart: String, $id: String, $equipment: String!, $gifUrl: String, $target: String){
+    saveRoutine3(name: $name, bodyPart: $bodyPart, id: $id, equipment: $equipment, gifUrl: $gifUrl, target: $target){
         _id
         username
         email
@@ -141,8 +141,8 @@ mutation saveRoutine($name: String, $bodyPart: String, $id: String, $equipment: 
 `
 
 export const SAVE_ROUTINE4 = gql `
-mutation saveRoutine($name: String, $bodyPart: String, $id: String, $equipment: String!, $gifUrl: String, $target: String){
-    saveRoutine(name: $name, bodyPart: $bodyPart, id: $id, equipment: $equipment, gifUrl: $gifUrl, target: $target){
+mutation saveRoutine4($name: String, $bodyPart: String, $id: String, $equipment: String!, $gifUrl: String, $target: String){
+    saveRoutine4(name: $name, bodyPart: $bodyPart, id: $id, equipment: $equipment, gifUrl: $gifUrl, target: $target){
         _id
         username
         email
@@ -167,8 +167,8 @@ mutation saveRoutine($name: String, $bodyPart: String, $id: String, $equipment: 
 `
 
 export const SAVE_ROUTINE5 = gql `
-mutation saveRoutine($name: String, $bodyPart: String, $id: String, $equipment: String!, $gifUrl: String, $target: String){
-    saveRoutine(name: $name, bodyPart: $bodyPart, id: $id, equipment: $equipment, gifUrl: $gifUrl, target: $target){
+mutation saveRoutine5($name: String, $bodyPart: String, $id: String, $equipment: String!, $gifUrl: String, $target: String){
+    saveRoutine5(name: $name, bodyPart: $bodyPart, id: $id, equipment: $equipment, gifUrl: $gifUrl, target: $target){
         _id
         username
         email
@@ -206,6 +206,102 @@ mutation updateRoutine($id: String!){
       gifUrl
     }
     routine{
+      name
+      bodyPart
+      id
+      equipment
+      gifUrl
+    }
+  }
+}
+`
+
+export const UPDATE_ROUTINE2 = gql `
+mutation updateRoutine2($id: String!){
+  updateRoutine2(id: $id){
+    username
+    email
+    _id
+    savedExercises{
+      name
+      bodyPart
+      id
+      equipment
+      gifUrl
+    }
+    routine2{
+      name
+      bodyPart
+      id
+      equipment
+      gifUrl
+    }
+  }
+}
+`
+
+export const UPDATE_ROUTINE3 = gql `
+mutation updateRoutine3($id: String!){
+  updateRoutine3(id: $id){
+    username
+    email
+    _id
+    savedExercises{
+      name
+      bodyPart
+      id
+      equipment
+      gifUrl
+    }
+    routine3{
+      name
+      bodyPart
+      id
+      equipment
+      gifUrl
+    }
+  }
+}
+`
+
+export const UPDATE_ROUTINE4 = gql `
+mutation updateRoutine4($id: String!){
+  updateRoutine4(id: $id){
+    username
+    email
+    _id
+    savedExercises{
+      name
+      bodyPart
+      id
+      equipment
+      gifUrl
+    }
+    routine4{
+      name
+      bodyPart
+      id
+      equipment
+      gifUrl
+    }
+  }
+}
+`
+
+export const UPDATE_ROUTINE5 = gql `
+mutation updateRoutine5($id: String!){
+  updateRoutine5(id: $id){
+    username
+    email
+    _id
+    savedExercises{
+      name
+      bodyPart
+      id
+      equipment
+      gifUrl
+    }
+    routine5{
       name
       bodyPart
       id

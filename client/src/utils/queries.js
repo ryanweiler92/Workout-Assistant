@@ -22,6 +22,38 @@ query user{
         gifUrl
         target
     }
+    routine2{
+        name
+        bodyPart
+        id
+        equipment
+        gifUrl
+        target
+    }
+    routine3{
+        name
+        bodyPart
+        id
+        equipment
+        gifUrl
+        target
+    }
+    routine4{
+        name
+        bodyPart
+        id
+        equipment
+        gifUrl
+        target
+    }
+    routine5{
+        name
+        bodyPart
+        id
+        equipment
+        gifUrl
+        target
+    }
     }
   }
 `

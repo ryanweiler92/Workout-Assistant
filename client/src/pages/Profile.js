@@ -173,6 +173,8 @@ const Profile = () => {
 
     const [searchInput, setSearchInput] = useState('All types');
 
+    console.log(searchInput);
+
     const [showExModal, setShowExModal] = useState(false);
 
     const { data: userDataMe } = useQuery(QUERY_USER);
@@ -390,7 +392,7 @@ const Profile = () => {
         if (searchInput === 'All types') {
             return savedExercises;
         } else if (searchInput === 'Body weight') {
-            const exercises = savedExercises.filter(exercise => exercise.equipment === 'body weight');
+            const exercises = savedExercises.filter(exercise => exercise.equipment === searchInput.toLowerCase());
             return exercises;
         } else {
             const exercises = savedExercises.filter(exercise => exercise.bodyPart === searchInput.toLowerCase());
@@ -400,7 +402,7 @@ const Profile = () => {
 
     // if data isn't here yet, say so
     if (!userDataLength) {
-        return <h2>Save some exercises!</h2>;
+        return <h2 className="save">Save some exercises!</h2>;
     }
 
     return (
@@ -427,15 +429,15 @@ const Profile = () => {
                                                 <div className="card d-flex align-items-center justify-content-center pb-3">
                                                     <Card.Header className="w-100 text-center text-capitalize font-weight-bold">
                                                         <Accordion.Toggle as={Button} variant="link" eventKey={exercise.id}>
-                                                            <p>{exercise.name}</p>
+                                                            <p className='titleBlock text-left'>{exercise.name}</p>
                                                             <p><Card.Img variant="bottom" src={exercise.gifUrl} className="search-gif" /></p>
                                                         </Accordion.Toggle>
                                                     </Card.Header>
                                                     <Accordion.Collapse eventKey={exercise.id}>
                                                     <Card.Body border='dark' className="gray">
-                                                            <Card.Text className="padding"><span className="key">Body Part: </span>{exercise.bodyPart}</Card.Text>
-                                                            <Card.Text className="padding"><span className="key">Equipment: </span>{exercise.equipment}</Card.Text>
-                                                            <Card.Text className="padding"><span className="key">Target: </span>{exercise.equipment}</Card.Text>
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Body Part: </span>{exercise.bodyPart}</Card.Text>
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Equipment: </span>{exercise.equipment}</Card.Text>
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Target: </span>{exercise.equipment}</Card.Text>
                                                         { routineInput === 'Routine 1' ? ( <Button onClick={() => handleUpdateRoutine(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
                                                         ) : routineInput === 'Routine 2' ? ( <Button onClick={() => handleUpdateRoutine2(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
                                                         ) : routineInput === 'Routine 3' ? ( <Button onClick={() => handleUpdateRoutine3(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
@@ -451,15 +453,15 @@ const Profile = () => {
                                                 <div className="card d-flex align-items-center justify-content-center pb-3">
                                                     <Card.Header className="w-100 text-center text-capitalize font-weight-bold">
                                                         <Accordion.Toggle as={Button} variant="link" eventKey={exercise.id}>
-                                                            <p>{exercise.name}</p>
+                                                            <p className='titleBlock text-left'>{exercise.name}</p>
                                                             <p><Card.Img variant="bottom" src={exercise.gifUrl} className="search-gif" /></p>
                                                         </Accordion.Toggle>
                                                     </Card.Header>
                                                     <Accordion.Collapse eventKey={exercise.id}>
                                                     <Card.Body border='dark' className="gray">
-                                                            <Card.Text className="padding"><span className="key">Body Part: </span>{exercise.bodyPart}</Card.Text>
-                                                            <Card.Text className="padding"><span className="key">Equipment: </span>{exercise.equipment}</Card.Text>
-                                                            <Card.Text className="padding"><span className="key">Target: </span>{exercise.equipment}</Card.Text>
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Body Part: </span>{exercise.bodyPart}</Card.Text>
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Equipment: </span>{exercise.equipment}</Card.Text>
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Target: </span>{exercise.equipment}</Card.Text>
                                                         { routineInput === 'Routine 1' ? ( <Button onClick={() => handleUpdateRoutine(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
                                                         ) : routineInput === 'Routine 2' ? ( <Button onClick={() => handleUpdateRoutine2(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
                                                         ) : routineInput === 'Routine 3' ? ( <Button onClick={() => handleUpdateRoutine3(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
@@ -475,15 +477,15 @@ const Profile = () => {
                                                 <div className="card d-flex align-items-center justify-content-center pb-3">
                                                     <Card.Header className="w-100 text-center text-capitalize font-weight-bold">
                                                         <Accordion.Toggle as={Button} variant="link" eventKey={exercise.id}>
-                                                            <p>{exercise.name}</p>
+                                                            <p className='titleBlock text-left'>{exercise.name}</p>
                                                             <p><Card.Img variant="bottom" src={exercise.gifUrl} className="search-gif" /></p>
                                                         </Accordion.Toggle>
                                                     </Card.Header>
                                                     <Accordion.Collapse eventKey={exercise.id}>
                                                     <Card.Body border='dark' className="gray">
-                                                            <Card.Text className="padding"><span className="key">Body Part: </span>{exercise.bodyPart}</Card.Text>
-                                                            <Card.Text className="padding"><span className="key">Equipment: </span>{exercise.equipment}</Card.Text>
-                                                            <Card.Text className="padding"><span className="key">Target: </span>{exercise.equipment}</Card.Text>
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Body Part: </span>{exercise.bodyPart}</Card.Text>
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Equipment: </span>{exercise.equipment}</Card.Text>
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Target: </span>{exercise.equipment}</Card.Text>
                                                         { routineInput === 'Routine 1' ? ( <Button onClick={() => handleUpdateRoutine(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
                                                         ) : routineInput === 'Routine 2' ? ( <Button onClick={() => handleUpdateRoutine2(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
                                                         ) : routineInput === 'Routine 3' ? ( <Button onClick={() => handleUpdateRoutine3(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
@@ -499,15 +501,15 @@ const Profile = () => {
                                                 <div className="card d-flex align-items-center justify-content-center pb-3">
                                                     <Card.Header className="w-100 text-center text-capitalize font-weight-bold">
                                                         <Accordion.Toggle as={Button} variant="link" eventKey={exercise.id}>
-                                                            <p>{exercise.name}</p>
+                                                            <p className='titleBlock text-left'>{exercise.name}</p>
                                                             <p><Card.Img variant="bottom" src={exercise.gifUrl} className="search-gif" /></p>
                                                         </Accordion.Toggle>
                                                     </Card.Header>
                                                     <Accordion.Collapse eventKey={exercise.id}>
                                                     <Card.Body border='dark' className="gray">
-                                                            <Card.Text className="padding"><span className="key">Body Part: </span>{exercise.bodyPart}</Card.Text>
-                                                            <Card.Text className="padding"><span className="key">Equipment: </span>{exercise.equipment}</Card.Text>
-                                                            <Card.Text className="padding"><span className="key">Target: </span>{exercise.equipment}</Card.Text>
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Body Part: </span>{exercise.bodyPart}</Card.Text>
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Equipment: </span>{exercise.equipment}</Card.Text>
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Target: </span>{exercise.equipment}</Card.Text>
                                                         { routineInput === 'Routine 1' ? ( <Button onClick={() => handleUpdateRoutine(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
                                                         ) : routineInput === 'Routine 2' ? ( <Button onClick={() => handleUpdateRoutine2(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
                                                         ) : routineInput === 'Routine 3' ? ( <Button onClick={() => handleUpdateRoutine3(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
@@ -523,15 +525,15 @@ const Profile = () => {
                                                 <div className="card d-flex align-items-center justify-content-center pb-3">
                                                     <Card.Header className="w-100 text-center text-capitalize font-weight-bold">
                                                         <Accordion.Toggle as={Button} variant="link" eventKey={exercise.id}>
-                                                            <p>{exercise.name}</p>
+                                                            <p className='titleBlock text-left'>{exercise.name}</p>
                                                             <p><Card.Img variant="bottom" src={exercise.gifUrl} className="search-gif" /></p>
                                                         </Accordion.Toggle>
                                                     </Card.Header>
                                                     <Accordion.Collapse eventKey={exercise.id}>
                                                     <Card.Body border='dark' className="gray">
-                                                            <Card.Text className="padding"><span className="key">Body Part: </span>{exercise.bodyPart}</Card.Text>
-                                                            <Card.Text className="padding"><span className="key">Equipment: </span>{exercise.equipment}</Card.Text>
-                                                            <Card.Text className="padding"><span className="key">Target: </span>{exercise.equipment}</Card.Text>
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Body Part: </span>{exercise.bodyPart}</Card.Text>
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Equipment: </span>{exercise.equipment}</Card.Text>
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Target: </span>{exercise.equipment}</Card.Text>
                                                         { routineInput === 'Routine 1' ? ( <Button onClick={() => handleUpdateRoutine(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
                                                         ) : routineInput === 'Routine 2' ? ( <Button onClick={() => handleUpdateRoutine2(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
                                                         ) : routineInput === 'Routine 3' ? ( <Button onClick={() => handleUpdateRoutine3(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
@@ -580,7 +582,7 @@ const Profile = () => {
                         </select>
                     </Col>
                     <Col>
-                        <p className="lead">
+                        <p className="lead view">
                             View by type
                         </p>
                         <select className='select' onChange={(e) => setSearchInput(e.target.value)}>

@@ -39,11 +39,12 @@ const Navigation = () => {
          size="lg"
          show={showModal}
          onHide={() => setShowModal(false)}
-         aria-labelledby='signup-modal'>
+         aria-labelledby='signup-modal'
+         >
          <Tab.Container defaultActiveKey='login'>
           <Modal.Header closeButton>
             <Modal.Title id='signup-modal'>
-              <Nav variant='pills'>
+              <Nav variant="pills">
                 <Nav.Item>
                   <Nav.Link eventKey='login'>Login</Nav.Link>
                 </Nav.Item>

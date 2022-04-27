@@ -78,8 +78,8 @@ const Home = () => {
         event.preventDefault();
 
         // CODE FOR HIDING JUMBOTRON AFTER SEARCHING
-        // const jumbo = document.querySelector(".jumbotron");
-        // jumbo.classList.add("hideJumbo");
+        const jumbo = document.querySelector(".jumbotron");
+        jumbo.classList.add("hideJumbo");
     
         try {
             const response = await queryExercises(searchInput);

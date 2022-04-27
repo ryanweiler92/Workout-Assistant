@@ -49,7 +49,7 @@ const LoginForm = () => {
                     Something went wrong with your login credentials!
                 </Alert>
                 <Form.Group>
-                    <Form.Label htmlFor="email">Email</Form.Label>
+                    <Form.Label htmlFor="email" bg-success>Email</Form.Label>
                     <Form.Control 
                     type="text"
                     placeholder="Your email"

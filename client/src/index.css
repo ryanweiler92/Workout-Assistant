@@ -53,9 +53,10 @@ body{
 
 .home-container {
   /* background-color: var(--tertiary); */
-  background-image: url("./assets/images/background-3.jpeg");
+  background-image: url("./assets/images/background-3-gray.png");
   background-position: left top;
   background-repeat: repeat;
+  padding-bottom: 25px;
   border-radius: 25px;
   color: white;
 }
@@ -169,6 +170,17 @@ footer button {
     border-bottom: 1px solid grey;
 }
 
+.titleBlock {
+    white-space: pre-line;
+}
+
+.save {
+    font-size: 40px;
+    color: #b1c4bc;
+    padding: 30px;
+    font-style: italic;
+}
+
 @media screen and (max-width: 574px){
   .navbar .container-fluid .navbar-brand{
     font-size: 25px;
@@ -179,8 +191,12 @@ footer button {
   font-size: 15px;
 }
 
-.pad {
-    padding-right: 15px;
+.view {
+    margin-top: 12px;
+}
+
+.sidebar {
+    min-height: 150px;
 }
 
 }

@@ -31,6 +31,10 @@ type User {
   email: String
   savedExercises: [Exercise]
   routine: [Exercise]
+  routine2: [Exercise]
+  routine3: [Exercise]
+  routine4: [Exercise]
+  routine5: [Exercise]
 }
 
 type Auth {
@@ -53,7 +57,15 @@ type Auth {
     removeExercise(id: String!): User
     saveExercise(name: String, bodyPart: String, id: String, equipment: String, gifUrl: String, target: String): User
     saveRoutine(name: String, bodyPart: String, id: String, equipment: String, gifUrl: String, target: String): User
+    saveRoutine2(name: String, bodyPart: String, id: String, equipment: String, gifUrl: String, target: String): User
+    saveRoutine3(name: String, bodyPart: String, id: String, equipment: String, gifUrl: String, target: String): User
+    saveRoutine4(name: String, bodyPart: String, id: String, equipment: String, gifUrl: String, target: String): User
+    saveRoutine5(name: String, bodyPart: String, id: String, equipment: String, gifUrl: String, target: String): User
     updateRoutine(id: String!): User
+    updateRoutine2(id: String!): User
+    updateRoutine3(id: String!): User
+    updateRoutine4(id: String!): User
+    updateRoutine5(id: String!): User
   }
 `;
 

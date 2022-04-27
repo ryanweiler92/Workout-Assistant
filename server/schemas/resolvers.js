@@ -117,6 +117,54 @@ const resolvers = {
       }
       throw new AuthenticationError('Not logged in');
     },
+    saveRoutine2: async (parent, { name, bodyPart, id, equipment, gifUrl, target }, context) => {
+        if (context.user) {
+          const updatedUser = await User
+          .findOneAndUpdate(
+            { _id: context.user._id },
+            { $addToSet: {routine2: { name, bodyPart, id, equipment, gifUrl, target }}},
+            { new: true }
+          );
+          return updatedUser
+        }
+        throw new AuthenticationError('Not logged in');
+      },
+    saveRoutine3: async (parent, { name, bodyPart, id, equipment, gifUrl, target }, context) => {
+        if (context.user) {
+            const updatedUser = await User
+            .findOneAndUpdate(
+            { _id: context.user._id },
+            { $addToSet: {routine3: { name, bodyPart, id, equipment, gifUrl, target }}},
+            { new: true }
+            );
+            return updatedUser
+        }
+        throw new AuthenticationError('Not logged in');
+    },
+    saveRoutine4: async (parent, { name, bodyPart, id, equipment, gifUrl, target }, context) => {
+        if (context.user) {
+          const updatedUser = await User
+          .findOneAndUpdate(
+            { _id: context.user._id },
+            { $addToSet: {routine4: { name, bodyPart, id, equipment, gifUrl, target }}},
+            { new: true }
+          );
+          return updatedUser
+        }
+        throw new AuthenticationError('Not logged in');
+      },
+    saveRoutine5: async (parent, { name, bodyPart, id, equipment, gifUrl, target }, context) => {
+        if (context.user) {
+            const updatedUser = await User
+            .findOneAndUpdate(
+            { _id: context.user._id },
+            { $addToSet: {routine5: { name, bodyPart, id, equipment, gifUrl, target }}},
+            { new: true }
+            );
+            return updatedUser
+        }
+        throw new AuthenticationError('Not logged in');
+        },  
     updateRoutine: async (parent, {id}, context) => {
       if (context.user) {
         const updatedUser = await User
@@ -129,6 +177,54 @@ const resolvers = {
       }
       throw new AuthenticationError('Not logged in');
     },
+    updateRoutine2: async (parent, {id}, context) => {
+        if (context.user) {
+          const updatedUser = await User
+          .findOneAndUpdate(
+            {_id: context.user._id},
+            { $pull: {routine2: {id}}},
+            { new: true }
+          )
+          return updatedUser
+        }
+        throw new AuthenticationError('Not logged in');
+      },
+      updateRoutine3: async (parent, {id}, context) => {
+        if (context.user) {
+          const updatedUser = await User
+          .findOneAndUpdate(
+            {_id: context.user._id},
+            { $pull: {routine3: {id}}},
+            { new: true }
+          )
+          return updatedUser
+        }
+        throw new AuthenticationError('Not logged in');
+      },
+      updateRoutine4: async (parent, {id}, context) => {
+        if (context.user) {
+          const updatedUser = await User
+          .findOneAndUpdate(
+            {_id: context.user._id},
+            { $pull: {routine4: {id}}},
+            { new: true }
+          )
+          return updatedUser
+        }
+        throw new AuthenticationError('Not logged in');
+      },
+      updateRoutine5: async (parent, {id}, context) => {
+        if (context.user) {
+          const updatedUser = await User
+          .findOneAndUpdate(
+            {_id: context.user._id},
+            { $pull: {routine5: {id}}},
+            { new: true }
+          )
+          return updatedUser
+        }
+        throw new AuthenticationError('Not logged in');
+      }
   }
 }
 

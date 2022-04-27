@@ -21,9 +21,6 @@ const exerciseSchema = new Schema({
   },
   target: {
     type: String
-  },
-  notes: {
-    type: String
   }
 });
 

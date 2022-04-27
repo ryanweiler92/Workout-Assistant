@@ -84,7 +84,7 @@ body{
 }
 
 footer {
-  background-image: url("./assets/images/background-3.jpeg");
+  background-image: url("./assets/images/background-nav.jpg");
   background-size:cover;
   background-position: center;
   height: 110px;
@@ -120,8 +120,9 @@ footer button {
 #meet{
   color: white;
   font-size: 20px;
-  display: inline;
+  display: inline-flex;
   padding-right: 10px;
+  text-shadow: -3px 5px 7px darkgrey;
 }
 
 .select {

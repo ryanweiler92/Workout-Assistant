@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Modal, Card, Button, Collapse } from 'react-bootstrap';
+import { Container, Row, Col, Modal, Card, Button, Collapse, Accordion } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { REMOVE_EXERCISE, SAVE_ROUTINE, SAVE_ROUTINE2, SAVE_ROUTINE3, SAVE_ROUTINE4, SAVE_ROUTINE5, UPDATE_ROUTINE, UPDATE_ROUTINE2, UPDATE_ROUTINE3, UPDATE_ROUTINE4, UPDATE_ROUTINE5 } from '../utils/mutations';
 import { QUERY_USER } from '../utils/queries';
@@ -437,7 +437,7 @@ const Profile = () => {
                                     ) : routineInput === 'Routine 2' ? ( <h1 className="text-center routineTitle">Routine 2: </h1>
                                     ) : routineInput === 'Routine 3' ? ( <h1 className="text-center routineTitle">Routine 3: </h1>
                                     ) : routineInput === 'Routine 4' ? ( <h1 className="text-center routineTitle">Routine 4: </h1>
-                                    ) : ( <h1 className="text-center">Routine 5: </h1>
+                                    ) : ( <h1 className="text-center routineTitle">Routine 5: </h1>
                                     )}
 					            </Drawer.ToC>
                                 <Row className="d-flex align-items-center justify-content-center mt-1">
@@ -696,11 +696,11 @@ const Profile = () => {
                             </Row>
                         </Modal.Body>
                         <Button variant='danger' size='lg' onClick={() => handleRemoveExercise(currentExercise.id)}>Remove this exercise</Button> 
-                        {routineInput === 'Routine 1' && checkButton(currentExercise, routineInput, userRoutine) ? ( <Button onClick={() => handleSaveRoutine(currentExercise)} className="btn-success">Add to routine</Button>
-                        ) : routineInput === 'Routine 2' && checkButton(currentExercise, routineInput, userRoutine) ? ( <Button onClick={() => handleSaveRoutine2(currentExercise)} className="btn-success">Add to routine</Button>
-                        ) : routineInput === 'Routine 3' && checkButton(currentExercise, routineInput, userRoutine) ? ( <Button onClick={() => handleSaveRoutine3(currentExercise)} className="btn-success">Add to routine</Button>
-                        ) : routineInput === 'Routine 4' && checkButton(currentExercise, routineInput, userRoutine) ? ( <Button onClick={() => handleSaveRoutine4(currentExercise)} className="btn-success">Add to routine</Button>
-                        ) : routineInput === 'Routine 5' && checkButton(currentExercise, routineInput, userRoutine) ? ( <Button onClick={() => handleSaveRoutine5(currentExercise)} className="btn-success">Add to routine</Button> 
+                        {routineInput === 'Routine 1' && checkButton(currentExercise, routineInput, userRoutine) ? ( <Button onClick={() => handleSaveRoutine(currentExercise)} className="btn-success" size='lg'>Add to routine</Button>
+                        ) : routineInput === 'Routine 2' && checkButton(currentExercise, routineInput, userRoutine) ? ( <Button onClick={() => handleSaveRoutine2(currentExercise)} className="btn-success" size='lg'>Add to routine</Button>
+                        ) : routineInput === 'Routine 3' && checkButton(currentExercise, routineInput, userRoutine) ? ( <Button onClick={() => handleSaveRoutine3(currentExercise)} className="btn-success" size='lg'>Add to routine</Button>
+                        ) : routineInput === 'Routine 4' && checkButton(currentExercise, routineInput, userRoutine) ? ( <Button onClick={() => handleSaveRoutine4(currentExercise)} className="btn-success" size='lg'>Add to routine</Button>
+                        ) : routineInput === 'Routine 5' && checkButton(currentExercise, routineInput, userRoutine) ? ( <Button onClick={() => handleSaveRoutine5(currentExercise)} className="btn-success" size='lg'>Add to routine</Button> 
                         ) : <Button disabled variant='secondary' size='lg'>Added to routine</Button> }
                     </Modal>
                 </Container>

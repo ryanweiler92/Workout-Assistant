@@ -173,8 +173,6 @@ const Profile = () => {
 
     const [searchInput, setSearchInput] = useState('All types');
 
-    console.log(searchInput);
-
     const [showExModal, setShowExModal] = useState(false);
 
     const { data: userDataMe } = useQuery(QUERY_USER);

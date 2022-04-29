@@ -644,13 +644,13 @@ const Profile = () => {
                         </Modal.Header>
                         <Modal.Body className="card">
                             <Row className="d-flex align-items-center justify-content-center">
-                                <p>{currentExercise.bodyPart === 'cardio' ? <span>Type: </span> : <span>Body Part: </span>} <span className="font-weight-bold text-capitalize">{currentExercise.bodyPart}</span></p>
+                                <p>{currentExercise.bodyPart === 'cardio' ? <span className="boxBorder">Type</span> : <span className="boxBorder">Body Part</span>} <span className="font-weight-bold text-capitalize"> {currentExercise.bodyPart}</span></p>
                             </Row>
                             <Row className="d-flex align-items-center justify-content-center">
-                                <p>Equipment: <span className="font-weight-bold text-capitalize">{currentExercise.equipment}</span></p>
+                                <p><span className="boxBorder">Equipment</span><span className="font-weight-bold text-capitalize"> {currentExercise.equipment}</span></p>
                             </Row>
                             <Row className="d-flex align-items-center justify-content-center">
-                                <p>Target Muscle: <span className="font-weight-bold text-capitalize">{currentExercise.target}</span></p>
+                                <p><span className="boxBorder">Target Muscle</span><span className="font-weight-bold text-capitalize"> {currentExercise.target}</span></p>
                             </Row>
                             <Row className="d-flex align-items-center justify-content-center">
                                 <img src={currentExercise.gifUrl} alt='animated demonstration' />

@@ -80,6 +80,8 @@ const Home = () => {
         // CODE FOR HIDING JUMBOTRON AFTER SEARCHING
         const jumbo = document.querySelector(".jumbotron");
         jumbo.classList.add("hideJumbo");
+        const plusBtn = document.querySelector(".expand");
+        plusBtn.classList.remove("hideButton");
     
         try {
             const response = await queryExercises(searchInput);
@@ -166,12 +168,30 @@ const Home = () => {
     })
     //end animation controls 
 
+    function showJumbo() {
+        const jumbo = document.querySelector(".jumbotron");
+        jumbo.classList.remove("hideJumbo");
+
+        const plusBtn = document.querySelector(".rounded-circle");
+        plusBtn.classList.add("hideButton");
+    }
+
+    function hideJumbo() {
+        const jumbo = document.querySelector(".jumbotron");
+        jumbo.classList.add("hideJumbo");
+
+        const plusBtn = document.querySelector(".rounded-circle");
+        plusBtn.classList.remove("hideButton");
+    }
+
     return (
         // <animated.div style={styles}>
         <>
             <div className="container mt-2">
+            <Button className="rounded-circle expand hideButton" onClick={showJumbo}>+</Button>
             <div className="jumbotron">
-                <h1 className="display-4">Say Hello to your Workout Assistant!</h1>
+                <Button className="rounded-circle top" onClick={hideJumbo}>-</Button>
+                <h1 className="display-4 hello">Say Hello to your Workout Assistant!</h1>
                 <p className="lead">Find all of the exercises you need for your next workout.</p>
                 <hr className="my-4" />
                 <Row>
@@ -269,13 +289,13 @@ const Home = () => {
                     </Modal.Header>
                     <Modal.Body className="card">
                         <Row className="d-flex align-items-center justify-content-center">
-                            <p>{currentExercise.bodyPart === 'cardio' ? <span>Type: </span> : <span>Body Part: </span>} <span className="font-weight-bold text-capitalize">{currentExercise.bodyPart}</span></p>
+                            <p>{currentExercise.bodyPart === 'cardio' ? <span className="boxBorder">Type</span> : <span className="boxBorder">Body Part</span>} <span className="font-weight-bold text-capitalize"> {currentExercise.bodyPart}</span></p>
                         </Row>
                         <Row className="d-flex align-items-center justify-content-center">
-                            <p>Equipment: <span className="font-weight-bold text-capitalize">{currentExercise.equipment}</span></p>
+                            <p><span className="boxBorder">Equipment</span> <span className="font-weight-bold text-capitalize"> {currentExercise.equipment}</span></p>
                         </Row>
                         <Row className="d-flex align-items-center justify-content-center">
-                            <p>Target Muscle: <span className="font-weight-bold text-capitalize">{currentExercise.target}</span></p>
+                            <p><span className="boxBorder">Target Muscle</span><span className="font-weight-bold text-capitalize"> {currentExercise.target}</span></p>
                         </Row>
                         <Row className="d-flex align-items-center justify-content-center">
                             <img src={currentExercise.gifUrl} alt='animated demonstration' />

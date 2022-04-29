@@ -67,6 +67,7 @@ body{
 
 .jumbotron {
   margin-top: 50px;
+  position: relative;
 }
 
 .card{
@@ -181,6 +182,31 @@ footer button {
     font-style: italic;
 }
 
+.expand {
+    margin-top: 10px;
+}
+
+.hideButton {
+    display: none;
+}
+
+.top {
+    position: absolute; 
+    top: 5px; 
+    left: 5px;
+}
+
+.boxBorder {
+    border-right: 2.8px solid #b7b7b7;
+    border-bottom: 2.8px solid #b3b3b3;
+    border-bottom-right-radius: 10px;
+    color: #0189D3;
+    padding: 5px;
+    font-size: 18px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
 @media screen and (max-width: 574px){
   .navbar .container-fluid .navbar-brand{
     font-size: 25px;
@@ -197,6 +223,14 @@ footer button {
 
 .sidebar {
     min-height: 150px;
+}
+
+.hello {
+    margin-top: 20px;
+}
+
+.mobile {
+    width: 200px;
 }
 
 }

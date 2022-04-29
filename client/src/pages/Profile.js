@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Modal, Card, Button, Collapse } from 'react-bootstrap';
+import { Container, Row, Col, Modal, Card, Button, Collapse, Accordion } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { REMOVE_EXERCISE, SAVE_ROUTINE, SAVE_ROUTINE2, SAVE_ROUTINE3, SAVE_ROUTINE4, SAVE_ROUTINE5, UPDATE_ROUTINE, UPDATE_ROUTINE2, UPDATE_ROUTINE3, UPDATE_ROUTINE4, UPDATE_ROUTINE5 } from '../utils/mutations';
 import { QUERY_USER } from '../utils/queries';
@@ -270,27 +270,6 @@ const Profile = () => {
         setShowExModal(true);
     };
 
-    // useEffect(() => {
-        
-    //     if (Auth.loggedIn()) {
-    //         function switchRoutine(userData) {
-    //             setCurrentRoutine(userData)
-    //         }
-    //     if (routineInput === 'Routine 1') {
-    //         switchRoutine(userRoutine.routine)
-    //     } else if (routineInput === 'Routine 2') {
-    //         switchRoutine(userRoutine.routine2)
-    //     } else if (routineInput === 'Routine 3') {
-    //         switchRoutine(userRoutine.routine3)
-    //     } else if (routineInput === 'Routine 4') {
-    //         switchRoutine(userRoutine.routine4)
-    //     } else {
-    //         switchRoutine(userRoutine.routine5)
-    //     }
-    
-    //     }
-    //   }, [userRoutine, routineInput, currentRoutine]); 
-
     const handleUpdateRoutine = async (exerciseId) => {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -411,7 +390,7 @@ const Profile = () => {
         if (searchInput === 'All types') {
             return savedExercises;
         } else if (searchInput === 'Body weight') {
-            const exercises = savedExercises.filter(exercise => exercise.equipment === 'body weight');
+            const exercises = savedExercises.filter(exercise => exercise.equipment === searchInput.toLowerCase());
             return exercises;
         } else {
             const exercises = savedExercises.filter(exercise => exercise.bodyPart === searchInput.toLowerCase());
@@ -421,7 +400,7 @@ const Profile = () => {
 
     // if data isn't here yet, say so
     if (!userDataLength) {
-        return <h2>Save some exercises!</h2>;
+        return <h2 className="save">Save some exercises!</h2>;
     }
 
     return (
@@ -437,151 +416,133 @@ const Profile = () => {
                                     ) : routineInput === 'Routine 2' ? ( <h1 className="text-center routineTitle">Routine 2: </h1>
                                     ) : routineInput === 'Routine 3' ? ( <h1 className="text-center routineTitle">Routine 3: </h1>
                                     ) : routineInput === 'Routine 4' ? ( <h1 className="text-center routineTitle">Routine 4: </h1>
-                                    ) : ( <h1 className="text-center">Routine 5: </h1>
+                                    ) : ( <h1 className="text-center routineTitle">Routine 5: </h1>
                                     )}
 					            </Drawer.ToC>
                                 <Row className="d-flex align-items-center justify-content-center mt-1">
+                                <Accordion>
                                     { routineInput === 'Routine 1' ? ( userRoutine.routine.map((exercise) => {
                                         return (
                                             <Col key={exercise.id}>
                                                 <div className="card d-flex align-items-center justify-content-center pb-3">
-                                                    <Card.Header className="w-100 text-center text-capitalize font-weight-bold">{exercise.name}</Card.Header>
-                                                    <Card.Body border='dark'>
-                                                        <Row className="d-flex align-items-center justify-content-center text-capitalize">
-                                                            <Card.Text>Body Part: {exercise.bodyPart}</Card.Text>
-                                                        </Row>
-                                                        <Row className="d-flex align-items-center justify-content-center text-capitalize">
-                                                            <Card.Text>Equipment: {exercise.equipment}</Card.Text>
-                                                        </Row>
-                                                        <Row className="d-flex align-items-center justify-content-center text-capitalize">
-                                                            <Card.Text>Target: {exercise.equipment}</Card.Text>
-                                                        </Row>
-                                                        <Row className="d-flex align-items-center justify-content-center">
-                                                            <Card.Img variant="bottom" src={exercise.gifUrl} className="search-gif" />
-                                                        </Row>
-                                                    </Card.Body>
-                                                    <Row>
-                                                        { routineInput === 'Routine 1' ? ( <Button onClick={() => handleUpdateRoutine(exercise.id)} className="btn-danger">Remove Exercise</Button>
-                                                        ) : routineInput === 'Routine 2' ? ( <Button onClick={() => handleUpdateRoutine2(exercise.id)} className="btn-danger">Remove Exercise</Button>
-                                                        ) : routineInput === 'Routine 3' ? ( <Button onClick={() => handleUpdateRoutine3(exercise.id)} className="btn-danger">Remove Exercise</Button>
-                                                        ) : routineInput === 'Routine 4' ? ( <Button onClick={() => handleUpdateRoutine4(exercise.id)} className="btn-danger">Remove Exercise</Button>
-                                                        ) : ( <Button onClick={() => handleUpdateRoutine5(exercise.id)} className="btn-danger">Remove Exercise</Button>
+                                                    <Card.Header className="w-100 text-center text-capitalize font-weight-bold">
+                                                        <Accordion.Toggle as={Button} variant="link" eventKey={exercise.id}>
+                                                            <p className='titleBlock text-left'>{exercise.name}</p>
+                                                            <p><Card.Img variant="bottom" src={exercise.gifUrl} className="search-gif" /></p>
+                                                        </Accordion.Toggle>
+                                                    </Card.Header>
+                                                    <Accordion.Collapse eventKey={exercise.id}>
+                                                    <Card.Body border='dark' className="gray">
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Body Part: </span>{exercise.bodyPart}</Card.Text>
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Equipment: </span>{exercise.equipment}</Card.Text>
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Target: </span>{exercise.equipment}</Card.Text>
+                                                        { routineInput === 'Routine 1' ? ( <Button onClick={() => handleUpdateRoutine(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
+                                                        ) : routineInput === 'Routine 2' ? ( <Button onClick={() => handleUpdateRoutine2(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
+                                                        ) : routineInput === 'Routine 3' ? ( <Button onClick={() => handleUpdateRoutine3(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
+                                                        ) : routineInput === 'Routine 4' ? ( <Button onClick={() => handleUpdateRoutine4(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
+                                                        ) : ( <Button onClick={() => handleUpdateRoutine5(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
                                                         )} 
-                                                    </Row>
+                                                    </Card.Body>
+                                                    </Accordion.Collapse>
                                                 </div>
                                             </Col>)})) : routineInput === 'Routine 2' ? ( userRoutine.routine2.map((exercise) => {
                                         return (
                                             <Col key={exercise.id}>
                                                 <div className="card d-flex align-items-center justify-content-center pb-3">
-                                                    <Card.Header className="w-100 text-center text-capitalize font-weight-bold">{exercise.name}</Card.Header>
-                                                    <Card.Body border='dark'>
-                                                        <Row className="d-flex align-items-center justify-content-center text-capitalize">
-                                                            <Card.Text>Body Part: {exercise.bodyPart}</Card.Text>
-                                                        </Row>
-                                                        <Row className="d-flex align-items-center justify-content-center text-capitalize">
-                                                            <Card.Text>Equipment: {exercise.equipment}</Card.Text>
-                                                        </Row>
-                                                        <Row className="d-flex align-items-center justify-content-center text-capitalize">
-                                                            <Card.Text>Target: {exercise.equipment}</Card.Text>
-                                                        </Row>
-                                                        <Row className="d-flex align-items-center justify-content-center">
-                                                            <Card.Img variant="bottom" src={exercise.gifUrl} className="search-gif" />
-                                                        </Row>
-                                                    </Card.Body>
-                                                    <Row>
-                                                        { routineInput === 'Routine 1' ? ( <Button onClick={() => handleUpdateRoutine(exercise.id)} className="btn-danger">Remove Exercise</Button>
-                                                        ) : routineInput === 'Routine 2' ? ( <Button onClick={() => handleUpdateRoutine2(exercise.id)} className="btn-danger">Remove Exercise</Button>
-                                                        ) : routineInput === 'Routine 3' ? ( <Button onClick={() => handleUpdateRoutine3(exercise.id)} className="btn-danger">Remove Exercise</Button>
-                                                        ) : routineInput === 'Routine 4' ? ( <Button onClick={() => handleUpdateRoutine4(exercise.id)} className="btn-danger">Remove Exercise</Button>
-                                                        ) : ( <Button onClick={() => handleUpdateRoutine5(exercise.id)} className="btn-danger">Remove Exercise</Button>
+                                                    <Card.Header className="w-100 text-center text-capitalize font-weight-bold">
+                                                        <Accordion.Toggle as={Button} variant="link" eventKey={exercise.id}>
+                                                            <p className='titleBlock text-left'>{exercise.name}</p>
+                                                            <p><Card.Img variant="bottom" src={exercise.gifUrl} className="search-gif" /></p>
+                                                        </Accordion.Toggle>
+                                                    </Card.Header>
+                                                    <Accordion.Collapse eventKey={exercise.id}>
+                                                    <Card.Body border='dark' className="gray">
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Body Part: </span>{exercise.bodyPart}</Card.Text>
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Equipment: </span>{exercise.equipment}</Card.Text>
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Target: </span>{exercise.equipment}</Card.Text>
+                                                        { routineInput === 'Routine 1' ? ( <Button onClick={() => handleUpdateRoutine(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
+                                                        ) : routineInput === 'Routine 2' ? ( <Button onClick={() => handleUpdateRoutine2(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
+                                                        ) : routineInput === 'Routine 3' ? ( <Button onClick={() => handleUpdateRoutine3(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
+                                                        ) : routineInput === 'Routine 4' ? ( <Button onClick={() => handleUpdateRoutine4(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
+                                                        ) : ( <Button onClick={() => handleUpdateRoutine5(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
                                                         )} 
-                                                    </Row>
+                                                    </Card.Body>
+                                                    </Accordion.Collapse>
                                                 </div>
                                             </Col>)})) : routineInput === 'Routine 3' ? ( userRoutine.routine3.map((exercise) => {
                                         return (
                                             <Col key={exercise.id}>
                                                 <div className="card d-flex align-items-center justify-content-center pb-3">
-                                                    <Card.Header className="w-100 text-center text-capitalize font-weight-bold">{exercise.name}</Card.Header>
-                                                    <Card.Body border='dark'>
-                                                        <Row className="d-flex align-items-center justify-content-center text-capitalize">
-                                                            <Card.Text>Body Part: {exercise.bodyPart}</Card.Text>
-                                                        </Row>
-                                                        <Row className="d-flex align-items-center justify-content-center text-capitalize">
-                                                            <Card.Text>Equipment: {exercise.equipment}</Card.Text>
-                                                        </Row>
-                                                        <Row className="d-flex align-items-center justify-content-center text-capitalize">
-                                                            <Card.Text>Target: {exercise.equipment}</Card.Text>
-                                                        </Row>
-                                                        <Row className="d-flex align-items-center justify-content-center">
-                                                            <Card.Img variant="bottom" src={exercise.gifUrl} className="search-gif" />
-                                                        </Row>
-                                                    </Card.Body>
-                                                    <Row>
-                                                        { routineInput === 'Routine 1' ? ( <Button onClick={() => handleUpdateRoutine(exercise.id)} className="btn-danger">Remove Exercise</Button>
-                                                        ) : routineInput === 'Routine 2' ? ( <Button onClick={() => handleUpdateRoutine2(exercise.id)} className="btn-danger">Remove Exercise</Button>
-                                                        ) : routineInput === 'Routine 3' ? ( <Button onClick={() => handleUpdateRoutine3(exercise.id)} className="btn-danger">Remove Exercise</Button>
-                                                        ) : routineInput === 'Routine 4' ? ( <Button onClick={() => handleUpdateRoutine4(exercise.id)} className="btn-danger">Remove Exercise</Button>
-                                                        ) : ( <Button onClick={() => handleUpdateRoutine5(exercise.id)} className="btn-danger">Remove Exercise</Button>
+                                                    <Card.Header className="w-100 text-center text-capitalize font-weight-bold">
+                                                        <Accordion.Toggle as={Button} variant="link" eventKey={exercise.id}>
+                                                            <p className='titleBlock text-left'>{exercise.name}</p>
+                                                            <p><Card.Img variant="bottom" src={exercise.gifUrl} className="search-gif" /></p>
+                                                        </Accordion.Toggle>
+                                                    </Card.Header>
+                                                    <Accordion.Collapse eventKey={exercise.id}>
+                                                    <Card.Body border='dark' className="gray">
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Body Part: </span>{exercise.bodyPart}</Card.Text>
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Equipment: </span>{exercise.equipment}</Card.Text>
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Target: </span>{exercise.equipment}</Card.Text>
+                                                        { routineInput === 'Routine 1' ? ( <Button onClick={() => handleUpdateRoutine(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
+                                                        ) : routineInput === 'Routine 2' ? ( <Button onClick={() => handleUpdateRoutine2(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
+                                                        ) : routineInput === 'Routine 3' ? ( <Button onClick={() => handleUpdateRoutine3(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
+                                                        ) : routineInput === 'Routine 4' ? ( <Button onClick={() => handleUpdateRoutine4(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
+                                                        ) : ( <Button onClick={() => handleUpdateRoutine5(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
                                                         )} 
-                                                    </Row>
+                                                    </Card.Body>
+                                                    </Accordion.Collapse>
                                                 </div>
                                             </Col>)})) : routineInput === 'Routine 4' ? ( userRoutine.routine4.map((exercise) => {
                                         return (
                                             <Col key={exercise.id}>
                                                 <div className="card d-flex align-items-center justify-content-center pb-3">
-                                                    <Card.Header className="w-100 text-center text-capitalize font-weight-bold">{exercise.name}</Card.Header>
-                                                    <Card.Body border='dark'>
-                                                        <Row className="d-flex align-items-center justify-content-center text-capitalize">
-                                                            <Card.Text>Body Part: {exercise.bodyPart}</Card.Text>
-                                                        </Row>
-                                                        <Row className="d-flex align-items-center justify-content-center text-capitalize">
-                                                            <Card.Text>Equipment: {exercise.equipment}</Card.Text>
-                                                        </Row>
-                                                        <Row className="d-flex align-items-center justify-content-center text-capitalize">
-                                                            <Card.Text>Target: {exercise.equipment}</Card.Text>
-                                                        </Row>
-                                                        <Row className="d-flex align-items-center justify-content-center">
-                                                            <Card.Img variant="bottom" src={exercise.gifUrl} className="search-gif" />
-                                                        </Row>
-                                                    </Card.Body>
-                                                    <Row>
-                                                        { routineInput === 'Routine 1' ? ( <Button onClick={() => handleUpdateRoutine(exercise.id)} className="btn-danger">Remove Exercise</Button>
-                                                        ) : routineInput === 'Routine 2' ? ( <Button onClick={() => handleUpdateRoutine2(exercise.id)} className="btn-danger">Remove Exercise</Button>
-                                                        ) : routineInput === 'Routine 3' ? ( <Button onClick={() => handleUpdateRoutine3(exercise.id)} className="btn-danger">Remove Exercise</Button>
-                                                        ) : routineInput === 'Routine 4' ? ( <Button onClick={() => handleUpdateRoutine4(exercise.id)} className="btn-danger">Remove Exercise</Button>
-                                                        ) : ( <Button onClick={() => handleUpdateRoutine5(exercise.id)} className="btn-danger">Remove Exercise</Button>
+                                                    <Card.Header className="w-100 text-center text-capitalize font-weight-bold">
+                                                        <Accordion.Toggle as={Button} variant="link" eventKey={exercise.id}>
+                                                            <p className='titleBlock text-left'>{exercise.name}</p>
+                                                            <p><Card.Img variant="bottom" src={exercise.gifUrl} className="search-gif" /></p>
+                                                        </Accordion.Toggle>
+                                                    </Card.Header>
+                                                    <Accordion.Collapse eventKey={exercise.id}>
+                                                    <Card.Body border='dark' className="gray">
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Body Part: </span>{exercise.bodyPart}</Card.Text>
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Equipment: </span>{exercise.equipment}</Card.Text>
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Target: </span>{exercise.equipment}</Card.Text>
+                                                        { routineInput === 'Routine 1' ? ( <Button onClick={() => handleUpdateRoutine(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
+                                                        ) : routineInput === 'Routine 2' ? ( <Button onClick={() => handleUpdateRoutine2(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
+                                                        ) : routineInput === 'Routine 3' ? ( <Button onClick={() => handleUpdateRoutine3(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
+                                                        ) : routineInput === 'Routine 4' ? ( <Button onClick={() => handleUpdateRoutine4(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
+                                                        ) : ( <Button onClick={() => handleUpdateRoutine5(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
                                                         )} 
-                                                    </Row>
+                                                    </Card.Body>
+                                                    </Accordion.Collapse>
                                                 </div>
                                             </Col>)})) : ( userRoutine.routine5.map((exercise) => {
                                         return (
                                             <Col key={exercise.id}>
                                                 <div className="card d-flex align-items-center justify-content-center pb-3">
-                                                    <Card.Header className="w-100 text-center text-capitalize font-weight-bold">{exercise.name}</Card.Header>
-                                                    <Card.Body border='dark'>
-                                                        <Row className="d-flex align-items-center justify-content-center text-capitalize">
-                                                            <Card.Text>Body Part: {exercise.bodyPart}</Card.Text>
-                                                        </Row>
-                                                        <Row className="d-flex align-items-center justify-content-center text-capitalize">
-                                                            <Card.Text>Equipment: {exercise.equipment}</Card.Text>
-                                                        </Row>
-                                                        <Row className="d-flex align-items-center justify-content-center text-capitalize">
-                                                            <Card.Text>Target: {exercise.equipment}</Card.Text>
-                                                        </Row>
-                                                        <Row className="d-flex align-items-center justify-content-center">
-                                                            <Card.Img variant="bottom" src={exercise.gifUrl} className="search-gif" />
-                                                        </Row>
-                                                    </Card.Body>
-                                                    <Row>
-                                                        { routineInput === 'Routine 1' ? ( <Button onClick={() => handleUpdateRoutine(exercise.id)} className="btn-danger">Remove Exercise</Button>
-                                                        ) : routineInput === 'Routine 2' ? ( <Button onClick={() => handleUpdateRoutine2(exercise.id)} className="btn-danger">Remove Exercise</Button>
-                                                        ) : routineInput === 'Routine 3' ? ( <Button onClick={() => handleUpdateRoutine3(exercise.id)} className="btn-danger">Remove Exercise</Button>
-                                                        ) : routineInput === 'Routine 4' ? ( <Button onClick={() => handleUpdateRoutine4(exercise.id)} className="btn-danger">Remove Exercise</Button>
-                                                        ) : ( <Button onClick={() => handleUpdateRoutine5(exercise.id)} className="btn-danger">Remove Exercise</Button>
+                                                    <Card.Header className="w-100 text-center text-capitalize font-weight-bold">
+                                                        <Accordion.Toggle as={Button} variant="link" eventKey={exercise.id}>
+                                                            <p className='titleBlock text-left'>{exercise.name}</p>
+                                                            <p><Card.Img variant="bottom" src={exercise.gifUrl} className="search-gif" /></p>
+                                                        </Accordion.Toggle>
+                                                    </Card.Header>
+                                                    <Accordion.Collapse eventKey={exercise.id}>
+                                                    <Card.Body border='dark' className="gray">
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Body Part: </span>{exercise.bodyPart}</Card.Text>
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Equipment: </span>{exercise.equipment}</Card.Text>
+                                                            <Card.Text className="padding text-capitalize"><span className="key">Target: </span>{exercise.equipment}</Card.Text>
+                                                        { routineInput === 'Routine 1' ? ( <Button onClick={() => handleUpdateRoutine(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
+                                                        ) : routineInput === 'Routine 2' ? ( <Button onClick={() => handleUpdateRoutine2(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
+                                                        ) : routineInput === 'Routine 3' ? ( <Button onClick={() => handleUpdateRoutine3(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
+                                                        ) : routineInput === 'Routine 4' ? ( <Button onClick={() => handleUpdateRoutine4(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
+                                                        ) : ( <Button onClick={() => handleUpdateRoutine5(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
                                                         )} 
-                                                    </Row>
+                                                    </Card.Body>
+                                                    </Accordion.Collapse>
                                                 </div>
                                             </Col>)}))}
+                                            </Accordion>
                                     
                                 </Row>
 				            </Drawer.Overflow>
@@ -592,7 +553,7 @@ const Profile = () => {
                 <Container>
                     <div className="container mt-2">
                     <div className="jumbotron">
-                    <h2 className="display-5"> Hello {userDataMe?.user.username}! 
+                    <h2 className="display-5"> Hello {userDataMe?.user.username}!
                         {filter.length
                         ? ` Viewing ${filter.length} saved ${filter.length === 1 ? 'exercise' : 'exercises'}:`
                         : ' No saved exercises!'}
@@ -619,7 +580,7 @@ const Profile = () => {
                         </select>
                     </Col>
                     <Col>
-                        <p className="lead">
+                        <p className="lead view">
                             View by type
                         </p>
                         <select className='select' onChange={(e) => setSearchInput(e.target.value)}>
@@ -642,8 +603,8 @@ const Profile = () => {
                 </Row>
                 <div className="collapse" id="collapse">
                     <div className="card card-body padding-top">
-                        To build up your routine, view a saved exercise and choose the option which says "Add to routine". Use
-                        the select routine menu to adjust which routine to change. Use the view by type menu to filter saved exercises.
+                        To build up your routine, view a saved exercise first to access the add button. On the sidebar, click on an exercise to show more details about it. Use
+                        the select routine menu to adjust which routine to change. Lastly, use the view by type menu to filter saved exercises.
                     </div>
                 </div>
                     </div>
@@ -696,11 +657,11 @@ const Profile = () => {
                             </Row>
                         </Modal.Body>
                         <Button variant='danger' size='lg' onClick={() => handleRemoveExercise(currentExercise.id)}>Remove this exercise</Button> 
-                        {routineInput === 'Routine 1' && checkButton(currentExercise, routineInput, userRoutine) ? ( <Button onClick={() => handleSaveRoutine(currentExercise)} className="btn-success">Add to routine</Button>
-                        ) : routineInput === 'Routine 2' && checkButton(currentExercise, routineInput, userRoutine) ? ( <Button onClick={() => handleSaveRoutine2(currentExercise)} className="btn-success">Add to routine</Button>
-                        ) : routineInput === 'Routine 3' && checkButton(currentExercise, routineInput, userRoutine) ? ( <Button onClick={() => handleSaveRoutine3(currentExercise)} className="btn-success">Add to routine</Button>
-                        ) : routineInput === 'Routine 4' && checkButton(currentExercise, routineInput, userRoutine) ? ( <Button onClick={() => handleSaveRoutine4(currentExercise)} className="btn-success">Add to routine</Button>
-                        ) : routineInput === 'Routine 5' && checkButton(currentExercise, routineInput, userRoutine) ? ( <Button onClick={() => handleSaveRoutine5(currentExercise)} className="btn-success">Add to routine</Button> 
+                        {routineInput === 'Routine 1' && checkButton(currentExercise, routineInput, userRoutine) ? ( <Button onClick={() => handleSaveRoutine(currentExercise)} className="btn-success" size='lg'>Add to routine</Button>
+                        ) : routineInput === 'Routine 2' && checkButton(currentExercise, routineInput, userRoutine) ? ( <Button onClick={() => handleSaveRoutine2(currentExercise)} className="btn-success" size='lg'>Add to routine</Button>
+                        ) : routineInput === 'Routine 3' && checkButton(currentExercise, routineInput, userRoutine) ? ( <Button onClick={() => handleSaveRoutine3(currentExercise)} className="btn-success" size='lg'>Add to routine</Button>
+                        ) : routineInput === 'Routine 4' && checkButton(currentExercise, routineInput, userRoutine) ? ( <Button onClick={() => handleSaveRoutine4(currentExercise)} className="btn-success" size='lg'>Add to routine</Button>
+                        ) : routineInput === 'Routine 5' && checkButton(currentExercise, routineInput, userRoutine) ? ( <Button onClick={() => handleSaveRoutine5(currentExercise)} className="btn-success" size='lg'>Add to routine</Button> 
                         ) : <Button disabled variant='secondary' size='lg'>Added to routine</Button> }
                     </Modal>
                 </Container>

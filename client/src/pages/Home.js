@@ -78,8 +78,8 @@ const Home = () => {
         event.preventDefault();
 
         // CODE FOR HIDING JUMBOTRON AFTER SEARCHING
-        // const jumbo = document.querySelector(".jumbotron");
-        // jumbo.classList.add("hideJumbo");
+        const jumbo = document.querySelector(".jumbotron");
+        jumbo.classList.add("hideJumbo");
     
         try {
             const response = await queryExercises(searchInput);
@@ -167,7 +167,8 @@ const Home = () => {
     //end animation controls 
 
     return (
-        <animated.div style={styles}>
+        // <animated.div style={styles}>
+        <>
             <div className="container mt-2">
             <div className="jumbotron">
                 <h1 className="display-4">Say Hello to your Workout Assistant!</h1>
@@ -362,7 +363,8 @@ const Home = () => {
                     </Modal.Body>
                 </Modal>
             </Container>
-        </animated.div>
+        </>
+        // </animated.div>
         
     ) 
 }

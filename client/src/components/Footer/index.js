@@ -41,7 +41,7 @@ const Footer = () => {
                 
             <p>
             <span id="meet">Meet the creators</span>
-            <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+            <OverlayTrigger trigger="click" placement="top" overlay={popover}>
                 <Button type="button">
                     <i className="fa-solid fa-bars"></i>
                 </Button>

@@ -234,9 +234,9 @@ const Home = () => {
                             <select className='select' onChange={(e) => setSearchInput(e.target.value)}>
                                 <option>All types</option>
                                 <option>Body weight</option>
+                                <option>Cardio</option>
                             <optgroup label='By body part'>
                                 <option>Back</option>
-                                <option>Cardio</option>
                                 <option>Chest</option>
                                 <option>Lower arms</option>
                                 <option>Lower legs</option>
@@ -302,7 +302,7 @@ const Home = () => {
                         </Row>
                     </Modal.Body>
 
-                    {!checkButton(currentExercise) && Auth.loggedIn() ? ( <Button disabled variant='secondary' size='lg'>Exercise already saved</Button> ) : Auth.loggedIn() && checkButton(currentExercise) ? (
+                    {!checkButton(currentExercise) && Auth.loggedIn() ? ( <Button disabled variant='secondary' size='lg'>Exercise saved</Button> ) : Auth.loggedIn() && checkButton(currentExercise) ? (
                         <Button variant='success' size='lg' onClick={() => handleSaveExercise(currentExercise.id)}>Save this exercise</Button> ) : ( <Button disabled variant='secondary' size='lg'>Login to save this exercise</Button>
                     )}
                 </Modal>

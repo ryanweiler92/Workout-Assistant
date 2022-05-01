@@ -234,9 +234,9 @@ const Home = () => {
                             <select className='select' onChange={(e) => setSearchInput(e.target.value)}>
                                 <option>All types</option>
                                 <option>Body weight</option>
+                                <option>Cardio</option>
                             <optgroup label='By body part'>
                                 <option>Back</option>
-                                <option>Cardio</option>
                                 <option>Chest</option>
                                 <option>Lower arms</option>
                                 <option>Lower legs</option>

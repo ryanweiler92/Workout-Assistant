@@ -6,28 +6,24 @@ import Auth from '../../utils/auth';
 
 const LoginForm = () => {
     
-    const [login] = useMutation(LOGIN_USER);
-    const [userFormData, setUserFormData] = useState({ email: '', password: ''});
-    const [validated] = useState(false);
-    const [showAlert, setShowAlert] = useState(false);
+    const [login, { error }] = useMutation(LOGIN_USER);
+    const [formState, setFormState] = useState({ email: '', password: ''});
 
-    const handleInputChange = (event) => {
+    const handleChange = (event) => {
         const { name, value } = event.target;
-        setUserFormData({ ...userFormData, [name]: value });
+
+        setFormState({ 
+            ...formState, 
+            [name]: value, 
+        });
     };
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-
         try {
             const { data } = await login({
-                variables: { ...userFormData }
+                variables: { ...formState }
             });
 
             Auth.login(data.login.token);
@@ -35,18 +31,52 @@ const LoginForm = () => {
             console.error(e)
         }
 
-        setUserFormData({
-            username: '',
+        setFormState({
             email: '',
             password: ''
         });
     };
 
     return (
-        <>
-            <Form noValidate validated={validated} onSubmit={handleFormSubmit} >
+        <main className="flex-row justify-center mb-4">
+        <div className="col-12 col-md-6">
+          <div className="card">
+            <h4 className="card-header">Login</h4>
+            <div className="card-body">
+              <form onSubmit={handleFormSubmit}>
+                <input
+                  className="form-input"
+                  placeholder="Your email"
+                  name="email"
+                  type="email"
+                  id="email"
+                  value={formState.email}
+                  onChange={handleChange}
+                />
+                <input
+                  className="form-input"
+                  placeholder="******"
+                  name="password"
+                  type="password"
+                  id="password"
+                  value={formState.password}
+                  onChange={handleChange}
+                />
+                <button className="btn d-block w-100" type="submit">
+                  Submit
+                </button>
+              </form>
+  
+              {error && <div>Login failed</div>}
+            </div>
+          </div>
+        </div>
+      </main>
+    )
+
+            {/* <Form noValidate validated={validated} onSubmit={handleFormSubmit} >
                 <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-                    Something went wrong with your login credentials!
+                    Invalid login credentials!
                 </Alert>
                 <Form.Group>
                     <Form.Label htmlFor="email">Email</Form.Label>
@@ -56,6 +86,7 @@ const LoginForm = () => {
                     name="email"
                     onChange={handleInputChange}
                     value={userFormData.email}
+                    onSubmit={handleFormSubmit}
                     required
                     />
                     <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
@@ -69,6 +100,7 @@ const LoginForm = () => {
                     name="password"
                     onChange={handleInputChange}
                     value={userFormData.password}
+                    onSubmit={handleFormSubmit}
                     required
                     />
                     <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
@@ -80,9 +112,9 @@ const LoginForm = () => {
                 variant="success">
                 Submit
                 </Button>
-            </Form>
-        </>
-    );
+            </Form> */}
+        // </>
+    // );
 };
 
 export default LoginForm;

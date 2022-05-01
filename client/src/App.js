@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
+import "@fontawesome/fontawesome-free/js/all"
 
 const httpLink = createHttpLink({
   uri: '/graphql',

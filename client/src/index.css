@@ -207,8 +207,13 @@ footer button {
     margin-bottom: 10px;
 }
 
-.fa-github{
-  font-family: FontAwesome !important;
+
+.fa-brands, .fab {
+    opacity: 80%;
+}
+
+.fa-brands:hover, .fab:hover {
+    opacity: 100%;
 }
 
 @media screen and (max-width: 574px){

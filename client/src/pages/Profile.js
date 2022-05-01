@@ -433,7 +433,7 @@ const Profile = () => {
                                                     </Card.Header>
                                                     <Accordion.Collapse eventKey={exercise.id}>
                                                     <Card.Body border='dark' className="gray">
-                                                            <Card.Text className="padding text-capitalize"><span className="key">Body Part: </span>{exercise.bodyPart}</Card.Text>
+                                                            <Card.Text className="padding text-capitalize">{exercise.bodyPart === 'cardio' ? <span className="key">Type: </span> : <span className="key">Body Part: </span>}{exercise.bodyPart}</Card.Text>
                                                             <Card.Text className="padding text-capitalize"><span className="key">Equipment: </span>{exercise.equipment}</Card.Text>
                                                             <Card.Text className="padding text-capitalize"><span className="key">Target: </span>{exercise.equipment}</Card.Text>
                                                         { routineInput === 'Routine 1' ? ( <Button onClick={() => handleUpdateRoutine(exercise.id)} className="btn-danger padding">Remove Exercise</Button>
@@ -586,9 +586,9 @@ const Profile = () => {
                         <select className='select' onChange={(e) => setSearchInput(e.target.value)}>
                             <option>All types</option>
                             <option>Body weight</option>
+                            <option>Cardio</option>
                         <optgroup label='By body part'>
                             <option>Back</option>
-                            <option>Cardio</option>
                             <option>Chest</option>
                             <option>Lower arms</option>
                             <option>Lower legs</option>

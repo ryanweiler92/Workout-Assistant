@@ -207,6 +207,14 @@ footer button {
     margin-bottom: 10px;
 }
 
+.fa-brands, .fab {
+    opacity: 80%;
+}
+
+.fa-brands:hover, .fab:hover {
+    opacity: 100%;
+}
+
 @media screen and (max-width: 574px){
   .navbar .container-fluid .navbar-brand{
     font-size: 25px;

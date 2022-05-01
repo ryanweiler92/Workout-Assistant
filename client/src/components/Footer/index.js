@@ -35,7 +35,7 @@ const Footer = () => {
     <footer className="footer container-fluid">
         <Row className="d-flex justify-content-center align-items-center">
             <Col className="col-6 align-items-center text-center">
-        <p><a href="https://github.com/ryanweiler92/Workout-Assistant" target="_blank"><i className="fab fa-github icon"></i></a></p>
+            <p><a href="https://github.com/ryanweiler92/Workout-Assistant" target="_blank"><i className="fab fa-github icon"></i></a></p>
             </Col>
             <Col className="col-6 text-center">
                 

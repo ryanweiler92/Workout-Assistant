@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Form, Button, Card, Modal, Carousel } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Card, Modal, Carousel, Nav, Tab } from 'react-bootstrap';
 import { queryExercises } from '../utils/API';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_USER } from '../utils/queries';
 import { SAVE_EXERCISE } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { useSpring, animated } from '@react-spring/web';
+import LoginForm from '../components/LoginForm';
+import SignupForm from '../components/SignupForm';
 
 const Home = () => {
     const [saveExercise] = useMutation(SAVE_EXERCISE);
@@ -17,6 +19,8 @@ const Home = () => {
     const [currentExercise, setCurrentExercise] = useState('');
 
     const [showExModal, setShowExModal] = useState(false);
+
+    const [showModal, setShowModal] = useState(false);
 
     const handleChooseExercise = (exercise) => {
         setCurrentExercise(exercise);
@@ -277,6 +281,36 @@ const Home = () => {
                 })}
                 </Row>
                 <Modal
+                show={showModal}
+                onHide={() => setShowModal(false)}
+                aria-labelledby="signup-modal"
+                >
+                        <Tab.Container defaultActiveKey='login'>
+          <Modal.Header closeButton>
+            <Modal.Title id='signup-modal'>
+              <Nav variant="pills">
+                <Nav.Item>
+                  <Nav.Link eventKey='login'>Login</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey='signup'>Sign Up</Nav.Link>
+                </Nav.Item>
+              </Nav>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Tab.Content>
+              <Tab.Pane eventKey='login'>
+                <LoginForm handleModalClose={() => setShowModal(false)} />
+              </Tab.Pane>
+              <Tab.Pane eventKey='signup'>
+                <SignupForm handleModalClose={() => setShowModal(false)} />
+              </Tab.Pane>
+            </Tab.Content>
+          </Modal.Body>
+        </Tab.Container>
+        </Modal>
+                <Modal
                     size="lg"
                     show={showExModal}
                     onHide={() => setShowExModal(false)}
@@ -303,7 +337,7 @@ const Home = () => {
                     </Modal.Body>
 
                     {!checkButton(currentExercise) && Auth.loggedIn() ? ( <Button disabled variant='secondary' size='lg'>Exercise saved</Button> ) : Auth.loggedIn() && checkButton(currentExercise) ? (
-                        <Button variant='success' size='lg' onClick={() => handleSaveExercise(currentExercise.id)}>Save this exercise</Button> ) : ( <Button disabled variant='secondary' size='lg'>Login to save this exercise</Button>
+                        <Button variant='success' size='lg' onClick={() => handleSaveExercise(currentExercise.id)}>Save this exercise</Button> ) : ( <Button variant='secondary' size='lg' onClick={() => setShowModal(true)}>Login to save this exercise</Button>
                     )}
                 </Modal>
 

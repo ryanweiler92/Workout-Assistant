@@ -3,7 +3,7 @@
 
 ## Links
 * Repository Link: [Workout-Assistant](https://github.com/ryanweiler92/Workout-Assistant)
-* Application Link: [Workout-Assistant](https://shielded-ravine-00058.herokuapp.com/)
+* Application Link: [Workout-Assistant](https://powerful-beach-20504.herokuapp.com/)
 * For any additional questions please reach out to ryanweiler92@gmail.com, kespitalnic@gmail.com or gregoryjohncarter@gmail.com
 
 ## Description

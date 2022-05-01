@@ -209,11 +209,11 @@ footer button {
 
 
 .fa-brands, .fab {
-    opacity: 80%;
+    opacity: 80% !important;
 }
 
 .fa-brands:hover, .fab:hover {
-    opacity: 100%;
+    opacity: 100% !important;
 }
 
 @media screen and (max-width: 574px){

@@ -1,51 +1,38 @@
-# Workout-Assistant 
+# Workout-Assistant
+![shield](https://img.shields.io/badge/license-No%20License-green)
 
-## To Launch Just Server side
-From the server folder// npm start  localhost:3001/graphql
+## Links
+* Repository Link: [Workout-Assistant](https://github.com/ryanweiler92/Workout-Assistant)
+* Application Link: [Workout-Assistant](https://shielded-ravine-00058.herokuapp.com/)
+* For any additional questions please reach out to ryanweiler92@gmail.com, kespitalnic@gmail.com or gregoryjohncarter@gmail.com
 
-## To Launch Just Client Side
-From the client folder// npm start localhost:3000 
+## Description
+Our application provides users with a platform where they can keep track of exercise routines and improve their exercise regiment. 
+We provide a user interface which is integrated with our database, so that we can display exercise data and routines unqiue to the user.
 
-## To Launch Server & Client
-From root directoy// npm run develop 
+## Table of Contents
+* [Installation](#installation)
+* [Usage](#usage)
+* [Contributors](#contributors)
+* [Tests](#tests)
+* [License](#license)
 
+## Installation
+No installation is required. 
 
+## Usage
+![screenshot](./client/src/assets/images/screenshot.jpg)
 
-## (Description) 
-We want to provide users with a platform where they can keep track of 
-exercise routines. Improve their exercise regiment with other resources including APIs.
-Provide a user interface which is integrated with our database, so that we can display
-the tracked data in a way that is persistent and engaging for the user. 
+## Contributors
+Ryan Weiler
+* GitHub: [Ryan-Weiler-GitHub](https://github.com/ryanweiler92)
+Katie Spitalnic
+* GitHub: [Katie-Spitalnic-GitHub](https://github.com/kspitalnic)
+Gregory Carter
+* GitHub: [Gregory-Carter-GitHub](https://github.com/gregoryjohncarter)
 
-## (User Story) 
-An application where users can look at an exercise library and save workouts to their dashboard. 
+## Tests 
+No testing available at this time.
 
-CSS UI -Ryan
-Backend- Katie 
-
-Login In/Logout Signup Front End/Login (Ryan) 
-
-
-Search/Save Workouts Dropdowns Page (Greg)
---Push to profile
-
-
-Profile Page ()
---Display saved exercises 
---Chose from your saved exercises and apply routines
-
-MODELS:
-
-userModel
-username,
-email,
-password,
-savedWorkouts: [workoutSchema]
-
-WorkoutSchema
-name,
-bodyPart,
-equipment,
-gifURL,
-id,
-notes(blank)
+## License
+![shield](https://img.shields.io/badge/license-No%20License-green)

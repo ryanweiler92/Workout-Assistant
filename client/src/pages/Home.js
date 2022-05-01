@@ -302,7 +302,7 @@ const Home = () => {
                         </Row>
                     </Modal.Body>
 
-                    {!checkButton(currentExercise) && Auth.loggedIn() ? ( <Button disabled variant='secondary' size='lg'>Exercise already saved</Button> ) : Auth.loggedIn() && checkButton(currentExercise) ? (
+                    {!checkButton(currentExercise) && Auth.loggedIn() ? ( <Button disabled variant='secondary' size='lg'>Exercise saved</Button> ) : Auth.loggedIn() && checkButton(currentExercise) ? (
                         <Button variant='success' size='lg' onClick={() => handleSaveExercise(currentExercise.id)}>Save this exercise</Button> ) : ( <Button disabled variant='secondary' size='lg'>Login to save this exercise</Button>
                     )}
                 </Modal>

@@ -38,52 +38,28 @@ const LoginForm = (props) => {
 
             <Form onSubmit={handleFormSubmit}>
 
-        <Form.Group>
-          <Form.Label htmlFor='email'>Email</Form.Label>
-          <Form.Control
-            type='email'
-            placeholder='Your email address'
-            name='email'
-            onChange={handleChange}
-            value={formState.email}
-            required
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label htmlFor='password'>Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Your password'
-            name='password'
-            onChange={handleChange}
-            value={formState.password}
-            required
-          />
-        </Form.Group>
-                {/* <div className="flex-row space-between my-1">
-                    <label htmlFor="email">Email</label>
-                </div>
-                <div className="flex-row space-between my-2">
-                    <input
-                        placeholder="Your email address"
-                        name="email"
-                        type="email"
-                        id="email"
+                <Form.Group>
+                    <Form.Label htmlFor='email'>Email</Form.Label>
+                    <Form.Control
+                        type='email'
+                        placeholder='Your email address'
+                        name='email'
                         onChange={handleChange}
+                        value={formState.email}
+                        required
                     />
-                </div>
-                <div className="flex-row space-between my-1">
-                    <label htmlFor="pwd">Password:</label>
-                </div>
-                <div className="flex-row space-between my-1">
-                    <input
-                        placeholder="Your password"
-                        name="password"
-                        type="password"
-                        id="pwd"
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label htmlFor='password'>Password</Form.Label>
+                    <Form.Control
+                        type='password'
+                        placeholder='Your password'
+                        name='password'
                         onChange={handleChange}
+                        value={formState.password}
+                        required
                     />
-                </div> */}
+                </Form.Group>
                 {error ? (
                     <Alert dismissible onClose={() => setShowAlert(true)} show={showAlert} variant='danger'>
                         Invalid login credentials!
@@ -97,10 +73,9 @@ const LoginForm = (props) => {
                         Submit
                     </Button>
                 </div>
-                </Form>
+            </Form>
 
-            
-     </div>
+        </div>
 
     )
 }

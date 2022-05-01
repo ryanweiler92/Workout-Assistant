@@ -23,7 +23,7 @@ const Footer = () => {
                     <ListGroup.Item>
                         Gregory Carter
                         <a href="https://github.com/gregoryjohncarter" target="_blank">
-                            <i className="fab fa-github icon small-icon"></i>
+                            <i className="fa fa-github-square"></i>
                         </a>
                     </ListGroup.Item>
                 </ListGroup>

@@ -24,12 +24,10 @@ No installation is required.
 ![screenshot](./client/src/assets/images/screenshot.jpg)
 
 ## Contributors
-Ryan Weiler
-* GitHub: [Ryan-Weiler-GitHub](https://github.com/ryanweiler92)
-Katie Spitalnic
-* GitHub: [Katie-Spitalnic-GitHub](https://github.com/kspitalnic)
-Gregory Carter
-* GitHub: [Gregory-Carter-GitHub](https://github.com/gregoryjohncarter)
+
+* [Ryan-Weiler](https://github.com/ryanweiler92)
+* [Katie-Spitalnic](https://github.com/kspitalnic)
+* [Gregory-Carter](https://github.com/gregoryjohncarter)
 
 ## Tests 
 No testing available at this time.

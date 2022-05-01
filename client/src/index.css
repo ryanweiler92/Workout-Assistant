@@ -6,6 +6,17 @@
   --crayola: #0189D3;
 }
 
+@font-face{
+  font-family: 'Font-Awesome';
+  src: asset-url('font-awesome.eot');
+  src: asset-url('font-awesome.eot?#iefix') format('embedded-opentype'),  
+  asset-url('font-awesome.svg') format('svg'),  
+  asset-url('font-awesome.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 body{
   /* background: var(--crayola) */
   background-image: url("./assets/images/turf_bg.jpeg");
@@ -210,10 +221,12 @@ footer button {
 
 .fa-brands, .fab {
     opacity: 80% !important;
+    font-family: 'Font-Awesome';
 }
 
 .fa-brands:hover, .fab:hover {
     opacity: 100% !important;
+    font-family: 'Font-Awesome';
 }
 
 @media screen and (max-width: 574px){

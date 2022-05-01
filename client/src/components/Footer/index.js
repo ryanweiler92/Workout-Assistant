@@ -11,19 +11,19 @@ const Footer = () => {
                     <ListGroup.Item>
                         Ryan Weiler
                         <a href="https://github.com/ryanweiler92" target="_blank">
-                            <i className="fab fa-github icon small-icon"></i>
+                            <i className="bi bi-github github-icon"></i>
                         </a>
                     </ListGroup.Item>
                     <ListGroup.Item>
                         Katie Spitalnic
                         <a href="https://github.com/kspitalnic" target="_blank">
-                            <i className="fab fa-github icon small-icon"></i>
+                            <i className="bi bi-github github-icon"></i>
                         </a>
                     </ListGroup.Item>
                     <ListGroup.Item>
                         Gregory Carter
                         <a href="https://github.com/gregoryjohncarter" target="_blank">
-                            <i className="fa fa-github-square"></i>
+                            <i className="bi bi-github github-icon"></i>
                         </a>
                     </ListGroup.Item>
                 </ListGroup>
@@ -35,7 +35,7 @@ const Footer = () => {
     <footer className="footer container-fluid">
         <Row className="d-flex justify-content-center align-items-center">
             <Col className="col-6 align-items-center text-center">
-            <p><a href="https://github.com/ryanweiler92/Workout-Assistant" target="_blank"><i className="fab fa-github icon"></i></a></p>
+            <p><a href="https://github.com/ryanweiler92/Workout-Assistant" target="_blank"><i className="bi bi-github"></i></a></p>
             </Col>
             <Col className="col-6 text-center">
                 

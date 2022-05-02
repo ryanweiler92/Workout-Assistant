@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { AiFillGithub } from "react-icons/ai";
 import { Container, Row, Col, Button, Popover, ListGroup, OverlayTrigger} from 'react-bootstrap';
 
 const Footer = () => {
@@ -35,11 +36,11 @@ const Footer = () => {
     <footer className="footer container-fluid">
         <Row className="d-flex justify-content-center align-items-center">
             <Col className="col-6 align-items-center text-center">
-            <p><a href="https://github.com/ryanweiler92/Workout-Assistant" target="_blank"><i className="bi bi-github"></i></a></p>
+            <p><a href="https://github.com/ryanweiler92/Workout-Assistant" target="_blank"><AiFillGithub className="gitHub-style"/></a></p>
             </Col>
             <Col className="col-6 text-center">
                 
-            <p>
+            <p className="margin-footer">
             <span id="meet">Meet the creators</span>
             <OverlayTrigger trigger="click" placement="top" overlay={popover}>
                 <Button type="button">

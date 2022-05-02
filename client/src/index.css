@@ -227,6 +227,22 @@ footer button {
   margin-left: 4px;
 }
 
+.gitHub-style {
+    opacity: 80%;
+    color: #ffffff;
+    font-size: 3em;
+    margin-top: 20px;
+}
+
+.gitHub-style:hover {
+    opacity: 100%;
+}
+
+.margin-footer {
+    margin-top: 20px;
+}
+
+
 @media screen and (max-width: 574px){
   .navbar .container-fluid .navbar-brand{
     font-size: 25px;
@@ -247,6 +263,19 @@ footer button {
 
 .hello {
     margin-top: 20px;
+}
+
+.gitHub-style {
+    font-size: 3em;
+    margin-top: 10px;
+}
+
+.margin-footer {
+    margin-top: 10px;
+}
+
+#meet {
+    font-size: 15px;
 }
 
 }

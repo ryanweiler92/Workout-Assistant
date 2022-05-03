@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { AiFillGithub } from "react-icons/ai";
 import { Container, Row, Col, Button, Popover, ListGroup, OverlayTrigger} from 'react-bootstrap';
+import  github from '../../assets/images/github.png' 
 
 const Footer = () => {
 
@@ -36,7 +36,7 @@ const Footer = () => {
     <footer className="footer container-fluid">
         <Row className="d-flex justify-content-center align-items-center">
             <Col className="col-6 align-items-center text-center">
-            <p><a href="https://github.com/ryanweiler92/Workout-Assistant" target="_blank"><AiFillGithub className="gitHub-style"/></a></p>
+            <a href="https://github.com/ryanweiler92/Workout-Assistant" target="_blank"><img src={github} className="github-logo"/></a>
             </Col>
             <Col className="col-6 text-center">
                 

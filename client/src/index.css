@@ -112,6 +112,12 @@ footer button {
   width: 2.5rem;
 }
 
+.github-logo{
+  margin-top: 10px;
+  height: 75px;
+  width: 75px;
+}
+
 .small-icon{
   height: 1rem;
   font-size: 2em;

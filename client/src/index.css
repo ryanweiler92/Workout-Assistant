@@ -118,6 +118,11 @@ footer button {
   width: 75px;
 }
 
+.navbar-toggler{
+  margin-top: 5px;
+   background-color: grey;
+ }
+
 .small-icon{
   height: 1rem;
   font-size: 2em;

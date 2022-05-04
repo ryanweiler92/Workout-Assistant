@@ -20,7 +20,7 @@ const Navigation = () => {
                     Workout Assistant
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls='navbar' />
-                <Navbar.Collapse id='navbar'>
+                <Navbar.Collapse id='navbar' className="my-class-1">
                 <Nav className="ml-auto">
                     {Auth.loggedIn() ? (
                     <>
